@@ -71,7 +71,61 @@
         </header>
         <main class="main">
             <div class="main__container">
-                Main
+                <div class="main__cart">
+                    <h1 class="heading-1">Корзина</h1>
+                </div>
+                <div class="main__total content-box content-box--shadow">
+                    <div class="main__total-prices">
+                        <div class="main__total-price main__total-price--title">
+                            <h2 class="heading-2">Итого</h2>
+                            <div class="main__total-prices-value price">
+                                <h2 class="heading-2 price-value" id="price-total">2 101 063</h2>
+                                <h3 class="heading-3 price-currency"> сом</h3>
+                            </div>
+                        </div>
+                        <div class="main__total-price">
+                            <p class="text-16"><span id="goods-count">203</span> товара</p>
+                            <div class="main__total-prices-value price">
+                                <span class="text-16 price-value" id="price-discountless">2 302 048</span>
+                                <span class="text-16 price-currency"> сом</span>
+                            </div>
+                        </div>
+                        <div class="main__total-price">
+                            <p class="text-16">Скидка</p>
+                            <div class="main__total-prices-value price">
+                                <span class="text-16 price-value" id="price-discount">-200 985</span>
+                                <span class="text-16 price-currency"> сом</span>
+                            </div>
+                        </div>
+                        <div class="main__total-price">
+                            <p class="text-16">Доставка</p>
+                            <div class="main__total-prices-value price">
+                                <span class="text-16 price-value" id="price-shipping">Бесплатно</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main__shipping">
+                        <div class="main__shipping-delivery">
+                            <div class="main__shipping-title">
+                                <h4 class="heading-4">Доставка в пункт выдачи</h4>
+                                <button type="button"><img src="./assets/pen.svg" alt="Изменить"></button>
+                            </div>
+                            <div class="main__shipping-address text-13">
+                                Бишкек, улица Ахматбека Суюмбаева, 12/1
+                            </div>
+                            <input type="text" class="main__shipping-address-edit">
+                            <a href="#" class="main__shipping-date text-13 dotted dotted--magenta">5-8 фев
+                            </a>
+                        </div>
+                        <div class="main__shipping-redelivery">
+                            <img src="./assets/checkmark.svg" alt="Обратная доставка">
+                            <div class="main__shipping-redelivery-text text-13">
+                                Обратная доставка товаров на склад при отказе — <a href="#"
+                                    class="dotted dotted--green">бесплатно</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
         <footer class="footer">
