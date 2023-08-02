@@ -132,6 +132,73 @@ input[type="search"]::-webkit-search-results-decoration {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='49' height='2' viewBox='0 0 49 2' fill='none'%3E%3Cpath d='M1 1H48' stroke='%230CB477' stroke-opacity='0.2' stroke-linecap='square' stroke-dasharray='4 2'/%3E%3C/svg%3E");
 }
 
+.text-green {
+    color: var(--green);
+}
+
+.grey-box {
+    padding: 8px 8px 12px 8px;
+    border-radius: 8px;
+    background: var(--smoky);
+}
+
+.checkbox-label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkbox-label .input-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.checkbox-label .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    background-color: inherit;
+}
+
+.checkbox-label:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.checkbox-label input:checked ~ .checkmark {
+    background-color: var(--magenta);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-label input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-label .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
 /* Components */
 
 /* ====================================================================================== */
@@ -388,7 +455,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .main__shipping {
-
+    margin-bottom: 24px;
 }
 
 .main__shipping-delivery {
@@ -414,11 +481,35 @@ input[type="search"]::-webkit-search-results-decoration {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 8px 12px 8px;
-    border-radius: 8px;
-    background: var(--smoky);
 }
 
 .main__shipping-redelivery-text {
 
+}
+
+.main__payment {
+
+}
+
+.main__payment-title {
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main__payment-method {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.main__payment-method-logo {
+    padding: 7.33px 1px;
+    border-radius: 4px;
+    background: var(--smoky);
+}
+
+.main__payment-method-logo img{
+    display: block;
 }
