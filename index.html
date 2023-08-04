@@ -62,7 +62,7 @@
                                     d="M2.45442 2.65147C3.1177 2.55672 4.01745 2.5 5 2.5C5.98255 2.5 6.8823 2.55672 7.54558 2.65147C7.87345 2.69831 8.16489 2.75734 8.38495 2.83167C8.4917 2.86772 8.61185 2.91717 8.71511 2.98926C8.80017 3.04864 9 3.21275 9 3.5C9 3.78725 8.80017 3.95136 8.71511 4.01074C8.61185 4.08283 8.4917 4.13228 8.38495 4.16833C8.16489 4.24266 7.87345 4.30169 7.54558 4.34853C6.8823 4.44328 5.98255 4.5 5 4.5C4.01745 4.5 3.1177 4.44328 2.45442 4.34853C2.12655 4.30169 1.83511 4.24266 1.61505 4.16833C1.5083 4.13228 1.38815 4.08283 1.28489 4.01074C1.19983 3.95136 1 3.78725 1 3.5C1 3.21275 1.19983 3.04864 1.28489 2.98926C1.38815 2.91717 1.5083 2.86772 1.61505 2.83167C1.83511 2.75734 2.12655 2.69831 2.45442 2.65147Z"
                                     fill="white" />
                             </svg>
-                            <div class="header__link_cart-label">1</div>
+                            <div class="header__link_cart-label item-label">1</div>
                             Корзина
                         </a>
                     </li>
@@ -71,7 +71,7 @@
         </header>
         <main class="main">
             <div class="main__container">
-                <div class="main__cart cart">
+                <section class="main__cart cart">
                     <h1 class="heading-1 cart__title">Корзина</h1>
                     <div class="cart__controls text-16">
                         <label class="checkbox-label">
@@ -91,8 +91,10 @@
                                     <span class="checkmark"></span>
                                 </label>
                                 <div class="item__image">
-                                    <a href="#"><img src="./assets/images/product-image-1.png"
-                                            alt="Изображение товара"></a>
+                                    <a href="#">
+                                        <img src="./assets/images/product-image-1.png" alt="Изображение товара">
+                                        <div class="item__prop-mobile text-14">56</div>
+                                    </a>
                                 </div>
                                 <div class="item__info">
                                     <div class="item__price-mobile">
@@ -112,10 +114,14 @@
                                         <a href="#">Футболка UZcotton мужская</a>
                                     </h6>
                                     <dl class="item__props text-13">
-                                        <dt>Цвет</dt>
-                                        <dd>белый</dd>
-                                        <dt>Размер</dt>
-                                        <dd>56</dd>
+                                        <div class="item__props-block">
+                                            <dt>Цвет</dt>
+                                            <dd>белый</dd>
+                                        </div>
+                                        <div class="item__props-block mobile-hide">
+                                            <dt>Размер</dt>
+                                            <dd>56</dd>
+                                        </div>
                                     </dl>
                                     <div class="item__location text-13">
                                         Коледино WB
@@ -191,8 +197,10 @@
                                             бампер на Apple iPhone XR, MobiSafe</a>
                                     </h6>
                                     <dl class="item__props text-13">
-                                        <dt>Цвет</dt>
-                                        <dd>прозрачный</dd>
+                                        <div class="item__props-block">
+                                            <dt>Цвет</dt>
+                                            <dd>прозрачный</dd>
+                                        </div>
                                     </dl>
                                     <div class="item__location text-13">
                                         Коледино WB
@@ -310,96 +318,348 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <form action="#" class="main__total content-box content-box--shadow">
-                    <div class="main__total-prices">
-                        <div class="main__total-price main__total-price--title">
-                            <h2 class="heading-2">Итого</h2>
-                            <div class="main__total-prices-value price">
-                                <h2 class="heading-2 price-value" id="price-total">2 101 063</h2>
-                                <h3 class="heading-3 price-currency"> сом</h3>
-                            </div>
-                        </div>
-                        <div class="main__total-price">
-                            <p class="text-16"><span id="goods-count">203</span> товара</p>
-                            <div class="main__total-prices-value price">
-                                <span class="text-16 price-value" id="price-discountless">2 302 048</span>
-                                <span class="text-16 price-currency"> сом</span>
-                            </div>
-                        </div>
-                        <div class="main__total-price">
-                            <p class="text-16">Скидка</p>
-                            <div class="main__total-prices-value price">
-                                <span class="text-16 price-value" id="price-discount">-200 985</span>
-                                <span class="text-16 price-currency"> сом</span>
-                            </div>
-                        </div>
-                        <div class="main__total-price">
-                            <p class="text-16">Доставка</p>
-                            <div class="main__total-prices-value price">
-                                <span class="text-16 price-value" id="price-shipping">Бесплатно</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main__shipping">
-                        <div class="main__shipping-delivery">
-                            <div class="main__shipping-title">
-                                <h4 class="heading-4">Доставка в пункт выдачи</h4>
-                                <button type="button"><img src="./assets/icons/pen.svg" alt="Изменить"></button>
-                            </div>
-                            <div class="main__shipping-address text-13">
-                                Бишкек, улица Ахматбека Суюмбаева, 12/1
-                            </div>
-                            <a href="#" class="main__shipping-date text-13 dotted dotted--magenta">5-8 фев
-                            </a>
-                        </div>
-                        <div class="main__shipping-redelivery grey-box">
-                            <img src="./assets/icons/checkmark-rounded.svg" alt="Обратная доставка">
-                            <div class="main__shipping-redelivery-text text-13">
-                                Обратная доставка товаров на склад при отказе — <a href="#"
-                                    class="text-green dotted dotted--green">бесплатно</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main__payment">
-                        <div class="main__payment-block">
-                            <div class="main__payment-title">
-                                <h4 class="heading-4">Оплата картой</h4>
-                                <button type="button"><img src="./assets/icons/pen.svg" alt="Изменить"></button>
-                            </div>
-                            <div class="main__payment-method">
-                                <div class="main__payment-method-logo"><img src="./assets/icons/mir.svg" alt="Мир">
-                                </div>
-                                <span class="main__payment-method-number text-13">1234 12•• •••• 1234</span>
-                            </div>
-                        </div>
-                        <div class="main__payment-term grey-box">
-                            <label class="text-13 checkbox-label">
-                                <input type="checkbox" class="input-checkbox">
-                                <span class="checkmark"></span>
-                                <p class="text-13">Списать оплату сразу</p>
-                            </label>
-                            <span class="main__payment-term-description text-13">
-                                Спишем оплату с карты при получении
-                            </span>
-                        </div>
-                    </div>
-                    <div class="main__total-submit-block">
-                        <button type="submit" class="main__total-submit text-16">
-                            Заказать
+                    <div class="cart__controls text-16">
+                        <p class="text-16 weight-600">
+                            <span>Отсутствуют ·</span>
+                            <span>3 товара</span>
+                        </p>
+                        <button type="button" class="cart__controls-show">
+                            <img src="./assets/icons/arrow.svg" alt="Стрелка">
                         </button>
                     </div>
-                    <div class="main__agreement">
-                        <img src="./assets/icons/checkmark.svg" alt="Соглашаюсь">
-                        <p class="text-13">Соглашаюсь <a href="#" class="underlined">с правилами пользования торговой
-                                площадкой</a> и <a href="#" class="underlined">возврата</a></p>
+                    <div class="cart__missing">
+                        <div class="cart__item item item--missing">
+                            <div class="item__details">
+                                <div class="item__image">
+                                    <a href="#"><img src="./assets/images/product-image-1.png" alt="Изображение товара">
+                                        <div class="item__prop-mobile text-14">56</div>
+                                    </a>
+                                </div>
+                                <div class="item__info">
+                                    <h6 class="item__title text-16">
+                                        <a href="#">Футболка UZcotton мужская</a>
+                                    </h6>
+                                    <dl class="item__props text-13">
+                                        <div class="item__props-block">
+                                            <dt>Цвет</dt>
+                                            <dd>белый</dd>
+                                        </div>
+                                        <div class="item__props-block mobile-hide">
+                                            <dt>Размер</dt>
+                                            <dd>56</dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="item__meta">
+                                <div class="item__controls">
+                                    <div class="item__control-buttons control-buttons">
+                                        <button type="button" class="control-buttons__favorite" title="Сохранить">
+                                            <img src="/assets/icons/heart.svg" alt="Избранное">
+                                        </button>
+                                        <button type="button" class="control-buttons__delete" title="Удалить">
+                                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart__item item item--missing">
+                            <div class="item__details">
+                                <div class="item__image">
+                                    <a href="#"><img src="./assets/images/product-image-2.png"
+                                            alt="Изображение товара"></a>
+                                </div>
+                                <div class="item__info">
+                                    <h6 class="item__title text-16">
+                                        <a href="#">Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс
+                                            бампер на Apple iPhone XR, MobiSafe</a>
+                                    </h6>
+                                    <dl class="item__props text-13">
+                                        <div class="item__props-block">
+                                            <dt>Цвет</dt>
+                                            <dd>прозрачный</dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="item__meta">
+                                <div class="item__controls">
+                                    <div class="item__control-buttons control-buttons">
+                                        <button type="button" class="control-buttons__favorite" title="Сохранить">
+                                            <img src="/assets/icons/heart.svg" alt="Избранное">
+                                        </button>
+                                        <button type="button" class="control-buttons__delete" title="Удалить">
+                                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart__item item item--missing">
+                            <div class="item__details">
+                                <div class="item__image">
+                                    <a href="#"><img src="./assets/images/product-image-3.png" alt="Изображение товара">
+                                        <div class="item__prop-mobile text-14">56/54/52/50/48</div>
+                                    </a>
+                                </div>
+                                <div class="item__info">
+                                    <h6 class="item__title text-16">
+                                        <a href="#">Карандаши цветные Faber-Castell "Замок", набор 24 цвета, заточенные,
+                                            шестигранные, Faber-Castell </a>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="item__meta">
+                                <div class="item__controls">
+                                    <div class="item__control-buttons control-buttons">
+                                        <button type="button" class="control-buttons__favorite" title="Сохранить">
+                                            <img src="/assets/icons/heart.svg" alt="Избранное">
+                                        </button>
+                                        <button type="button" class="control-buttons__delete" title="Удалить">
+                                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                    <div class="cart__shipping content-box">
+                        <div class="cart__shipping-title title-block">
+                            <h2 class="heading-2">Способ доставки</h2>
+                            <button type="button" class="cart__shipping-edit text-16 weight-700">
+                                Изменить
+                            </button>
+                        </div>
+                        <div class="cart__shipping-info shipping-info">
+                            <dl>
+                                <div class="shipping-info__block">
+                                    <dt class="text-16 weight-600">
+                                        Пункт выдачи
+                                    </dt>
+                                    <dd>
+                                        <p class="text-16">Бишкек, улица Ахматбека Суюмбаева, 12/1</p>
+                                        <div class="shipping-info__meta text-13">
+                                            <span class="shipping-info__rating">4.99</span>
+                                            Ежедневно с 10 до 21
+                                        </div>
+                                    </dd>
+                                </div>
+                                <div class="shipping-info__block">
+                                    <dt class="text-16 weight-600">
+                                        Стоимость доставки
+                                    </dt>
+                                    <dd>
+                                        <p class="text-16">Бесплатно</p>
+                                    </dd>
+                                </div>
+                                <div class="shipping-info__block shipping-info__block--products">
+                                    <dt class="text-16 weight-600">
+                                        5—6 февраля
+                                    </dt>
+                                    <dd>
+                                        <div class="shipping-info__products">
+                                            <div class="shipping-info__product">
+                                                <a href="#"><img src="./assets/images/product-image-1.png"
+                                                        alt="Изображение"></a>
+                                            </div>
+                                            <div class="shipping-info__product">
+                                                <a href="#">
+                                                    <img src="./assets/images/product-image-2.png" alt="Изображение">
+                                                    <div class="shipping-info__product-label item-label">184</div>
+                                                </a>
+                                            </div>
+                                            <div class="shipping-info__product">
+                                                <a href="#">
+                                                    <img src="./assets/images/product-image-3.png" alt="Изображение">
+                                                    <div class="shipping-info__product-label item-label">2</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </div>
+                                <div class="shipping-info__block shipping-info__block--products">
+                                    <dt class="text-16 weight-600">
+                                        7—8 февраля
+                                    </dt>
+                                    <dd>
+                                        <div class="shipping-info__products">
+                                            <div class="shipping-info__product">
+                                                <a href="#">
+                                                    <img src="./assets/images/product-image-2.png" alt="Изображение">
+                                                    <div class="shipping-info__product-label item-label">16</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                </div>
+                            </dl>
+                            <div class="shipping-info__redelivery grey-box">
+                                <img src="./assets/icons/checkmark-rounded.svg" alt="Обратная доставка">
+                                <div class="shipping-info__redelivery-text text-13">
+                                    Обратная доставка товаров на склад при отказе — <a href="#"
+                                        class="text-green dotted dotted--green">бесплатно</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart__payment content-box">
+                        <div class="cart__payment-title title-block">
+                            <h2 class="heading-2">Способ оплаты</h2>
+                            <button type="button" class="cart__payment-edit text-16 weight-700">
+                                Изменить
+                            </button>
+                        </div>
+                        <div class="cart__payment-method payment-info">
+                            <div class="cart__payment-method-logo payment-info__logo"><img src="./assets/icons/mir.svg"
+                                    alt="Мир">
+                            </div>
+                            <span class="cart__payment-method-number text-16 payment-info__number">1234 56•• ••••
+                                1234</span>
+                            <span class="cart__payment-method-expiry text-16">01/30</span>
+                        </div>
+                        <span class="cart__payment-text text-13">Спишем оплату с карты при получении</span>
+                    </div>
+                    <div class="cart__recipient content-box">
+                        <div class="cart__recipient-title title-block">
+                            <h2 class="heading-2">Получатель</h2>
+                        </div>
+                        <form action="#" class="cart__recipient-form text-16">
+                            <div class="cart__recepient-input-block">
+                                <div class="input-block">
+                                    <label>
+                                        <input type="text" required>
+                                        <span class="input-block__placeholder">Имя</span>
+                                    </label>
+                                </div>
+                                <div class="input-block">
+                                    <label>
+                                        <input type="text" required>
+                                        <span class="input-block__placeholder">Фамилия</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="cart__recepient-input-block">
+                                <div class="input-block">
+
+                                    <label>
+                                        <input type="email" required>
+                                        <span class="input-block__placeholder">Электронная почта</span>
+                                    </label>
+                                </div>
+                                <div class="input-block">
+
+                                    <label>
+                                        <input type="tel" required>
+                                        <span class="input-block__placeholder">Телефон</span>
+                                    </label>
+                                </div>
+                                <div class="input-block">
+
+                                    <label>
+                                        <input type="number" required>
+                                        <span class="input-block__placeholder">ИНН</span>
+                                        <p class="input-block__description">Для таможенного оформления</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <section class="main__total">
+                    <form action="#" class="content-box content-box--shadow">
+                        <div class="main__total-prices">
+                            <div class="main__total-price main__total-price--title">
+                                <h2 class="heading-2">Итого</h2>
+                                <div class="main__total-prices-value price">
+                                    <h2 class="heading-2 price-value" id="price-total">2 101 063</h2>
+                                    <h3 class="heading-3 price-currency"> сом</h3>
+                                </div>
+                            </div>
+                            <div class="main__total-price">
+                                <p class="text-16"><span id="goods-count">203</span> товара</p>
+                                <div class="main__total-prices-value price">
+                                    <span class="text-16 price-value" id="price-discountless">2 302 048</span>
+                                    <span class="text-16 price-currency"> сом</span>
+                                </div>
+                            </div>
+                            <div class="main__total-price">
+                                <p class="text-16">Скидка</p>
+                                <div class="main__total-prices-value price">
+                                    <span class="text-16 price-value" id="price-discount">-200 985</span>
+                                    <span class="text-16 price-currency"> сом</span>
+                                </div>
+                            </div>
+                            <div class="main__total-price">
+                                <p class="text-16">Доставка</p>
+                                <div class="main__total-prices-value price">
+                                    <span class="text-16 price-value" id="price-shipping">Бесплатно</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main__shipping">
+                            <div class="main__shipping-delivery">
+                                <div class="main__shipping-title title-block">
+                                    <h4 class="heading-4">Доставка в пункт выдачи</h4>
+                                    <button type="button"><img src="./assets/icons/pen.svg" alt="Изменить"></button>
+                                </div>
+                                <div class="main__shipping-address text-13">
+                                    Бишкек, улица Ахматбека Суюмбаева, 12/1
+                                </div>
+                                <a href="#" class="main__shipping-date text-13 dotted dotted--magenta">5-8 фев
+                                </a>
+                            </div>
+                            <div class="main__shipping-redelivery grey-box">
+                                <img src="./assets/icons/checkmark-rounded.svg" alt="Обратная доставка">
+                                <div class="main__shipping-redelivery-text text-13">
+                                    Обратная доставка товаров на склад при отказе — <a href="#"
+                                        class="text-green dotted dotted--green">бесплатно</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main__payment">
+                            <div class="main__payment-block">
+                                <div class="main__payment-title">
+                                    <h4 class="heading-4">Оплата картой</h4>
+                                    <button type="button"><img src="./assets/icons/pen.svg" alt="Изменить"></button>
+                                </div>
+                                <div class="main__payment-method payment-info">
+                                    <div class="main__payment-method-logo payment-info__logo"><img
+                                            src="./assets/icons/mir.svg" alt="Мир">
+                                    </div>
+                                    <span class="main__payment-method-number text-13 payment-info__number">1234 12••
+                                        •••• 1234</span>
+                                </div>
+                            </div>
+                            <div class="main__payment-term grey-box">
+                                <label class="text-13 checkbox-label">
+                                    <input type="checkbox" class="input-checkbox">
+                                    <span class="checkmark"></span>
+                                    <p class="text-13">Списать оплату сразу</p>
+                                </label>
+                                <span class="main__payment-term-description text-13">
+                                    Спишем оплату с карты при получении
+                                </span>
+                            </div>
+                        </div>
+                        <div class="main__total-submit-block">
+                            <button type="submit" class="main__total-submit text-16">
+                                Заказать
+                            </button>
+                        </div>
+                        <div class="main__agreement">
+                            <img src="./assets/icons/checkmark.svg" alt="Соглашаюсь">
+                            <p class="text-13">Соглашаюсь <a href="#" class="underlined">с правилами пользования
+                                    торговой
+                                    площадкой</a> и <a href="#" class="underlined">возврата</a></p>
+                        </div>
+                    </form>
+                </section>
             </div>
         </main>
         <footer class="footer">
             <div class="footer__container">
-                Footer
+                <p class="text-13">© 2022 ООО «Товары и точка»</p>
             </div>
         </footer>
     </div>
