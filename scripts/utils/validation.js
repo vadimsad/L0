@@ -7,59 +7,82 @@ const EMPTY_WARNINGS = {
     itn: 'Укажите индекс',
 };
 const MISMATCH_WARNINGS = {
+    name: 'Укажите имя',
+    surname: 'Введите фамилию',
     email: 'Проверьте адрес электронной почты',
     tel: 'Формат: +9 999 999 99 99',
     itn: 'Формат: 1234567',
 };
 
-export function isInputEmpty(input) {
-    const isEmpty = input.validity.valueMissing;
+export function validateForm(form) {
+    const inputs = Array.from(form.querySelectorAll('input'));
+    const isAnyInputInvalid = inputs.map(validateInput).some(validation => !validation);
+    const isAnyInputEmpty = inputs.map(isInputEmpty).some(validation => validation);
 
-    if (isEmpty) {
-        const inputID = input.id;
-        const label = input.closest('label');
-        const warningBlock = label.querySelector('.input-block__warning');
-        markAsInvalid(label);
-        showWarning(warningBlock, EMPTY_WARNINGS[inputID]);
-    }
-}
-
-export function validateForm(event, form) {
-    if (form.checkValidity()) {
-        return true;
+    if (isAnyInputInvalid || isAnyInputEmpty) {
+        return false;
     }
 
-    event.preventDefault();
-
-    const inputs = form.querySelectorAll('input');
-    inputs.forEach(isInputEmpty);
-}
-
-export function handleTelInputChange(input) {
-    const inputValue = input.value.replace(/\D/g, '');
-      let formattedValue = formatTelNumber(inputValue);
-    input.value = formattedValue;
+    return true;
 }
 
 export function validateInput(input) {
     const inputID = input.id;
     const label = input.closest('label');
     const warningBlock = label.querySelector('.input-block__warning');
-    const validity = input.validity;
-    const inputMaxLength = input.getAttribute('data-maxlength');
+    const inputValue = input.value;
 
-    const phonePattern = /^\+\d\s\d{3}\s\d{3}\s\d{2}\s\d{2}$/;
-    const isTelValid = inputID === 'tel' ? (phonePattern.test(input.value) || input.value.length === 0) : true;
+    const validationConditions = {
+        'name': {
+            antiPattern: /[^a-zA-Zа-яА-ЯёЁ]/,
+            isValid: (value) => value === '' || !validationConditions['name'].antiPattern.test(value),
+        },
+        'surname': {
+            antiPattern: /[^a-zA-Zа-яА-ЯёЁ]/,
+            isValid: (value) => value === '' || !validationConditions['surname'].antiPattern.test(value),
+        },
+        'email': {
+            pattern: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
+            isValid: (value) => value === '' || validationConditions['email'].pattern.test(value),
+        },
+        'tel': {
+            pattern: /^\+\d\s\d{3}\s\d{3}\s\d{2}\s\d{2}$/,
+            isValid: (value) => value === '' || validationConditions['tel'].pattern.test(value),
+        },
+        'itn': {
+            isValid: (value) => value,
+        }
+    };
 
-    if (!isTelValid || validity.typeMismatch || (inputMaxLength && input.value.length > inputMaxLength)) {
+    const isInputValid = validationConditions[inputID]?.isValid(inputValue);
+
+    if (!isInputValid) {
         markAsInvalid(label);
         showWarning(warningBlock, MISMATCH_WARNINGS[inputID]);
+        return false;
     } else {
         markAsValid(label);
         hideWarning(warningBlock);
+
+        // Если нужно, чтобы после успешной ревалидации поля валидировались только после события blur, а не во время ввода:
+        input.oninput = '';
+        return true;
     }
 }
 
+export function handleTelInputChange(input) {
+    const inputValue = input.value.replace(/\D/g, '');
+    let formattedValue = formatTelNumber(inputValue);
+    input.value = formattedValue;
+}
+
+export function handleItnInputChange(input) {
+    const maxlength = input.getAttribute('data-maxlength');
+
+    if (input.value.length > maxlength) {
+        input.value = input.value.slice(0, maxlength); 
+    }
+}
 
 function formatTelNumber(number) {
     let formattedValue = '';
@@ -76,6 +99,20 @@ function formatTelNumber(number) {
     }
 
     return formattedValue;
+}
+
+function isInputEmpty(input) {
+    const isEmpty = input.validity.valueMissing;
+
+    if (isEmpty) {
+        const inputID = input.id;
+        const label = input.closest('label');
+        const warningBlock = label.querySelector('.input-block__warning');
+        markAsInvalid(label);
+        showWarning(warningBlock, EMPTY_WARNINGS[inputID]);
+        return true;
+    }
+    return false;
 }
 
 function markAsInvalid(element) {
