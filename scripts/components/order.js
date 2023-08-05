@@ -5,8 +5,19 @@ export default function handleOrderSubmit(event, formToValidate) {
         return;
     };
 
-    if(!validateForm(formToValidate)) {
+    const {isValid, invalidInputs} = validateForm(formToValidate);
+
+    if(!isValid) {
         event.preventDefault();
+        
+        invalidInputs.forEach(input => {
+            if (!input.classList.contains('shake')) {
+                input.classList.add('shake');
+            }
+            setTimeout(() => {
+                input.classList.remove('shake')
+            }, 350)
+        })
     }
 
     // Если нужно, чтобы после отправки формы пустые поля валидировались в момент ввода, а не после события blur:

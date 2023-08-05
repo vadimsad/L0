@@ -18,12 +18,13 @@ export function validateForm(form) {
     const inputs = Array.from(form.querySelectorAll('input'));
     const isAnyInputInvalid = inputs.map(validateInput).some(validation => !validation);
     const isAnyInputEmpty = inputs.map(isInputEmpty).some(validation => validation);
+    const invalidInputs = form.querySelectorAll('label.invalid input');
 
     if (isAnyInputInvalid || isAnyInputEmpty) {
-        return false;
+        return {isValid: false, invalidInputs};
     }
 
-    return true;
+    return {isValid: true, invalidInputs};
 }
 
 export function validateInput(input) {

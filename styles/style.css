@@ -1466,3 +1466,16 @@ input[type=number]{
 .footer .text-13 {
     color: rgba(255, 255, 255, 0.70);
 }
+
+/* Other */
+
+label.invalid input.shake, 
+label.invalid input.shake ~ span{
+    animation: shake .35s
+}
+    
+@keyframes shake{
+    25%{transform:translate(6px)}
+    50%{transform:translate(-6px)}
+    75%{transform:translate(6px)}
+}
