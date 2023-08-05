@@ -1195,7 +1195,7 @@ input[type=number]{
     width: 100%;
 }
 
-.cart__recepient-input-block .input-block label .input-block__placeholder {
+.cart__recepient-input-block .input-block .input-block__placeholder {
     color: var(--system-gray);
     position: absolute;
     top: 0;
@@ -1203,9 +1203,25 @@ input[type=number]{
     transition: all 0.2s ease-in-out;
 }
 
-.cart__recepient-input-block .input-block label input:focus ~ .input-block__placeholder {
+.cart__recepient-input-block .input-block input:not(:placeholder-shown) ~ .input-block__placeholder,
+.cart__recepient-input-block .input-block input:focus ~ .input-block__placeholder {
     top: -24px;
     font-size: 13px;
+}
+
+.cart__recepient-input-block .input-block label.invalid input {
+    color: var(--system-red);
+    border-bottom: 1px solid var(--system-red);
+}
+
+.cart__recepient-input-block .input-block label .input-block__warning {
+    color: var(--system-red);
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.cart__recepient-input-block .input-block label .input-block__warning:empty {
+    display: none;
 }
 
 .cart__recepient-input-block:not(:last-of-type) {
