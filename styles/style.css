@@ -74,7 +74,8 @@ input[type=number]{
 .heading-1,
 .heading-2,
 .heading-3,
-.heading-4 {
+.heading-4,
+.heading-5 {
     margin: 0;
     color: var(--text-black);
     font-weight: 700;
@@ -102,6 +103,11 @@ input[type=number]{
 .heading-4 {
     font-size: 16px;
     line-height: 24px;
+}
+
+.heading-5 {
+    font-size: 13px;
+    line-height: 16px;
 }
 
 .text-16,
@@ -256,6 +262,14 @@ input[type=number]{
     gap: 16px;
 }
 
+.control-buttons__favorite:hover {
+    filter: invert(22%) sepia(87%) saturate(5670%) hue-rotate(299deg) brightness(87%) contrast(101%);
+}
+
+.control-buttons__delete:hover {
+    filter: invert(37%) sepia(34%) saturate(3405%) hue-rotate(348deg) brightness(99%) contrast(95%);
+}
+
 .title-block {
     display: flex;
     justify-content: space-between;
@@ -285,6 +299,29 @@ input[type=number]{
 }
 
 .payment-info .payment-info__logo img {
+    display: block;
+}
+
+.tooltip-wrapper,
+.tooltip-trigger {
+    position: relative;
+}
+
+.tooltip-trigger {
+    cursor: pointer;
+}
+
+.tooltip {
+    display: none;
+    width: 280px;
+    position: absolute;
+    padding: 11px 16px 13px 16px;
+    border-radius: 8px;
+    background: var(--system-white);
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.30), 0px 2px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+.tooltip.active {
     display: block;
 }
 
@@ -522,6 +559,7 @@ input[type=number]{
     grid-template-columns: 2fr 1fr;
     padding-top: 24px;
     padding-bottom: 24px;
+    margin-bottom: 22px;
 }
 
 .main__cart {
@@ -531,6 +569,7 @@ input[type=number]{
 @media(max-width:560px) {
     .main__container {
         padding-top: 10px;
+        margin-bottom: 17px;
     }
 
     .main__cart {
@@ -627,7 +666,15 @@ input[type=number]{
 }
 
 .item__seller-tooltip {
-    display: none;
+    top: 100%;
+}
+
+.item__seller-tooltip .heading-5 {
+    margin-bottom: 8px;
+}
+
+.item__seller-tooltip .text-13:not(:last-of-type) {
+    margin-bottom: 8px;
 }
 
 .item__meta {
@@ -648,6 +695,7 @@ input[type=number]{
     margin-bottom: 7px;
     border-radius: 8px;
     background: var(--system-white);
+    overflow: hidden;
 }
 
 .item__counter-minus,
@@ -657,6 +705,11 @@ input[type=number]{
     font-weight: 400;
     line-height: 24px;
     letter-spacing: -0.2px;
+}
+
+.item__counter-minus:hover,
+.item__counter-plus:hover {
+    background-color: #ccc;
 }
 
 .item__counter-minus {
@@ -1460,7 +1513,7 @@ input[type=number]{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 45px 0px;
+    padding: 23px 0px;
 }
 
 .footer .text-13 {

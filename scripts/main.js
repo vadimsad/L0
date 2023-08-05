@@ -1,4 +1,4 @@
-import handleOrderSubmit from './components/order.js'
+import handleOrderSubmit from './components/orderForm.js'
 import { handleItnInputChange, handleTelInputChange, validateInput } from './utils/validation.js';
 
 const orderForm = document.querySelector('#make-order-form');
