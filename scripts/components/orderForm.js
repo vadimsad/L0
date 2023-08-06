@@ -23,5 +23,12 @@ export default function handleOrderSubmit(event, formToValidate) {
     // Если нужно, чтобы после отправки формы пустые поля валидировались в момент ввода, а не после события blur:
     const inputs = formToValidate.querySelectorAll('input');
     inputs.forEach(input =>input.oninput = () => validateInput(input));
+}
 
+export function changeSubmitText(checkbox, submitButton, price) {
+    if (checkbox.checked) {
+        submitButton.textContent = `Оплатить ${price} сом`;
+    } else {
+        submitButton.textContent = 'Заказать';
+    }
 }
