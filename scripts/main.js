@@ -1,5 +1,6 @@
-import handleOrderSubmit, { changeSubmitText } from './components/orderForm.js'
+import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { positionTooltip } from './components/tooltip.js';
+import { hideProducts } from './utils/hideProducts.js';
 import { throttle } from './utils/throttle.js';
 import { handleItnInputChange, handleTelInputChange, validateInput } from './utils/validation.js';
 
@@ -44,5 +45,18 @@ document.addEventListener('DOMContentLoaded', () => {
 const submitButton = orderForm.querySelector('button[type="submit"]');
 const totalPrice = orderForm.querySelector('#price-total').textContent;
 const immediatePaymentCheckbox = orderForm.querySelector('#immediate-payment');
+const immediatePaymentDescription = orderForm.querySelector('.main__payment-term-description');
 
-immediatePaymentCheckbox.addEventListener('change', () => changeSubmitText(immediatePaymentCheckbox, submitButton, totalPrice))
+immediatePaymentCheckbox.addEventListener('change', () => handleImmediatePaymentChange(immediatePaymentCheckbox, submitButton, totalPrice, immediatePaymentDescription));
+
+
+
+
+
+
+const hideButtons = document.querySelectorAll('.cart__controls-show');
+
+hideButtons.forEach(button => {
+    const productsBlock = button.closest('.cart__controls').nextElementSibling;
+    button.addEventListener('click', () => hideProducts(button, productsBlock))
+})

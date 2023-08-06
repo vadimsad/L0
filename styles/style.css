@@ -853,15 +853,39 @@ input[type=number]{
     flex-grow: 1;
 }
 
+.cart__controls-show.hidden img {
+    transform: rotate(180deg);
+}
+
 .cart__controls-show img{
     margin-left: auto;
     display: block;
     position: relative;
     top: 2px;
+    transition: transform 0.2s ease-in-out;
 }
 
 .cart__items {
     margin-bottom: 32px;
+    display: grid;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    transition: 1s;
+}
+
+.cart__items.hidden {
+    grid-template-rows: 0fr;
+    margin-bottom: 0;
+}
+
+.cart__items .cart__items-wrapper {
+    min-height: 0;
+    visibility: visible;
+    transition: visibility 1s;
+}
+
+.cart__items.hidden .cart__items-wrapper {
+    visibility: hidden;
 }
 
 .item__props {

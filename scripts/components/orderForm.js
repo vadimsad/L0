@@ -25,10 +25,16 @@ export default function handleOrderSubmit(event, formToValidate) {
     inputs.forEach(input =>input.oninput = () => validateInput(input));
 }
 
-export function changeSubmitText(checkbox, submitButton, price) {
+export function handleImmediatePaymentChange(checkbox, submitButton, price, elementToHide) {
+    const label = elementToHide.closest('.main__payment-term').querySelector('label');
+
     if (checkbox.checked) {
         submitButton.textContent = `Оплатить ${price} сом`;
+        elementToHide.style.display = 'none';
+        label.style.marginBottom = 0;
     } else {
         submitButton.textContent = 'Заказать';
+        elementToHide.style.display = 'block';
+        label.style.marginBottom = '';
     }
 }

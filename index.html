@@ -84,20 +84,107 @@
                         </button>
                     </div>
                     <div class="cart__items">
-                        <div class="cart__item item">
-                            <div class="item__details">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" class="input-checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <div class="item__image">
-                                    <a href="#">
-                                        <img src="./assets/images/product-image-1.png" alt="Изображение товара">
-                                        <div class="item__prop-mobile text-14">56</div>
-                                    </a>
+                        <div class="cart__items-wrapper">
+                            <div class="cart__item item">
+                                <div class="item__details">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="input-checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="item__image">
+                                        <a href="#">
+                                            <img src="./assets/images/product-image-1.png" alt="Изображение товара">
+                                            <div class="item__prop-mobile text-14">56</div>
+                                        </a>
+                                    </div>
+                                    <div class="item__info">
+                                        <div class="item__price-mobile tooltip-wrapper">
+                                            <div class="item__sum-total">
+                                                <h3 class="item__sum-total-value heading-3">
+                                                    522
+                                                </h3>
+                                                <h4 class="item__sum-total-currency heading-4">
+                                                    сом
+                                                </h4>
+                                            </div>
+                                            <div class="item__sum-discountless">
+                                                <span class="dotted line-through text-13 tooltip-trigger">1051
+                                                    сом</span>
+                                                <div class="tooltip">
+                                                    <dl>
+                                                        <div class="text-13">
+                                                            <dt>Скидка 55%</dt>
+                                                            <dd>−300 сом</dd>
+                                                        </div>
+                                                        <div class="text-13">
+                                                            <dt>Скидка покупателя 10%</dt>
+                                                            <dd>−30 сом</dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6 class="item__title text-16">
+                                            <a href="#">Футболка UZcotton мужская</a>
+                                        </h6>
+                                        <dl class="item__props text-13">
+                                            <div class="item__props-block">
+                                                <dt>Цвет</dt>
+                                                <dd>белый</dd>
+                                            </div>
+                                            <div class="item__props-block mobile-hide">
+                                                <dt>Размер</dt>
+                                                <dd>56</dd>
+                                            </div>
+                                        </dl>
+                                        <div class="item__location text-13">
+                                            Коледино WB
+                                        </div>
+                                        <div class="item__seller text-13 tooltip-wrapper">
+                                            OOO Вайлдберриз
+                                            <div class="item__seller-tooltip-trigger tooltip-trigger" tabindex="0">
+                                                <img src="./assets/icons/info.svg" alt="Информация">
+                                            </div>
+                                            <div class="item__seller-tooltip tooltip">
+                                                <h5 class="heading-5">
+                                                    OOO «ВАЙЛДБЕРРИЗ»
+                                                </h5>
+                                                <p class="text-13">
+                                                    ОГРН: 1067746062449
+                                                </p>
+                                                <p class="text-13">
+                                                    142181,
+                                                    Московская область,
+                                                    Г.О. ПОДОЛЬСК,
+                                                    Д КОЛЕДИНО,
+                                                    ТЕР. ИНДУСТРИАЛЬНЫЙ ПАРК
+                                                    КОЛЕДИНО,
+                                                    Д. 6, СТР. 1
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="item__info">
-                                    <div class="item__price-mobile tooltip-wrapper">
+                                <div class="item__meta">
+                                    <div class="item__controls">
+                                        <div class="item__counter">
+                                            <button type="button" class="item__counter-minus"><span>−</span></button>
+                                            <input type="number" min="1" class="item__counter-input" value="1">
+                                            <button type="button" class="item__counter-plus"><span>+</span></button>
+                                        </div>
+                                        <div class="item__remains text-13">
+                                            Осталось 2 шт.
+                                        </div>
+                                        <div class="item__control-buttons control-buttons">
+                                            <button type="button" class="control-buttons__favorite" title="Сохранить">
+                                                <img src="/assets/icons/heart.svg" alt="Избранное">
+                                            </button>
+                                            <button type="button" class="control-buttons__delete" title="Удалить">
+                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="item__sum">
                                         <div class="item__sum-total">
                                             <h3 class="item__sum-total-value heading-3">
                                                 522
@@ -106,8 +193,9 @@
                                                 сом
                                             </h4>
                                         </div>
-                                        <div class="item__sum-discountless">
-                                            <span class="dotted line-through text-13 tooltip-trigger">1051 сом</span>
+                                        <div class="item__sum-discountless tooltip-wrapper">
+                                            <span class="dotted line-through text-13 tooltip-trigger" tabindex="0">1051
+                                                сом</span>
                                             <div class="tooltip">
                                                 <dl>
                                                     <div class="text-13">
@@ -122,106 +210,96 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h6 class="item__title text-16">
-                                        <a href="#">Футболка UZcotton мужская</a>
-                                    </h6>
-                                    <dl class="item__props text-13">
-                                        <div class="item__props-block">
-                                            <dt>Цвет</dt>
-                                            <dd>белый</dd>
-                                        </div>
-                                        <div class="item__props-block mobile-hide">
-                                            <dt>Размер</dt>
-                                            <dd>56</dd>
-                                        </div>
-                                    </dl>
-                                    <div class="item__location text-13">
-                                        Коледино WB
-                                    </div>
-                                    <div class="item__seller text-13 tooltip-wrapper">
-                                        OOO Вайлдберриз
-                                        <div class="item__seller-tooltip-trigger tooltip-trigger" tabindex="0">
-                                            <img src="./assets/icons/info.svg" alt="Информация">
-                                        </div>
-                                        <div class="item__seller-tooltip tooltip">
-                                            <h5 class="heading-5">
-                                                OOO «ВАЙЛДБЕРРИЗ»
-                                            </h5>
-                                            <p class="text-13">
-                                                ОГРН: 1067746062449
-                                            </p>
-                                            <p class="text-13">
-                                                142181,
-                                                Московская область,
-                                                Г.О. ПОДОЛЬСК,
-                                                Д КОЛЕДИНО,
-                                                ТЕР. ИНДУСТРИАЛЬНЫЙ ПАРК
-                                                КОЛЕДИНО,
-                                                Д. 6, СТР. 1
-                                            </p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="item__meta">
-                                <div class="item__controls">
-                                    <div class="item__counter">
-                                        <button type="button" class="item__counter-minus"><span>−</span></button>
-                                        <input type="number" min="1" class="item__counter-input" value="1">
-                                        <button type="button" class="item__counter-plus"><span>+</span></button>
+                            <div class="cart__item item">
+                                <div class="item__details">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="input-checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="item__image">
+                                        <a href="#"><img src="./assets/images/product-image-2.png"
+                                                alt="Изображение товара"></a>
                                     </div>
-                                    <div class="item__remains text-13">
-                                        Осталось 2 шт.
-                                    </div>
-                                    <div class="item__control-buttons control-buttons">
-                                        <button type="button" class="control-buttons__favorite" title="Сохранить">
-                                            <img src="/assets/icons/heart.svg" alt="Избранное">
-                                        </button>
-                                        <button type="button" class="control-buttons__delete" title="Удалить">
-                                            <img src="/assets/icons/trash.svg" alt="Удалить">
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="item__sum">
-                                    <div class="item__sum-total">
-                                        <h3 class="item__sum-total-value heading-3">
-                                            522
-                                        </h3>
-                                        <h4 class="item__sum-total-currency heading-4">
-                                            сом
-                                        </h4>
-                                    </div>
-                                    <div class="item__sum-discountless tooltip-wrapper">
-                                        <span class="dotted line-through text-13 tooltip-trigger" tabindex="0">1051
-                                            сом</span>
-                                        <div class="tooltip">
-                                            <dl>
-                                                <div class="text-13">
-                                                    <dt>Скидка 55%</dt>
-                                                    <dd>−300 сом</dd>
+                                    <div class="item__info">
+                                        <div class="item__price-mobile tooltip-wrapper">
+                                            <div class="item__sum-total">
+                                                <h3 class="item__sum-total-value heading-3">
+                                                    2 100 047
+                                                </h3>
+                                                <h4 class="item__sum-total-currency heading-4">
+                                                    сом
+                                                </h4>
+                                            </div>
+                                            <div class="item__sum-discountless">
+                                                <span class="dotted line-through text-13 tooltip-trigger">2 300 047
+                                                    сом</span>
+                                                <div class="tooltip">
+                                                    <dl>
+                                                        <div class="text-13">
+                                                            <dt>Скидка 55%</dt>
+                                                            <dd>−300 сом</dd>
+                                                        </div>
+                                                        <div class="text-13">
+                                                            <dt>Скидка покупателя 10%</dt>
+                                                            <dd>−30 сом</dd>
+                                                        </div>
+                                                    </dl>
                                                 </div>
-                                                <div class="text-13">
-                                                    <dt>Скидка покупателя 10%</dt>
-                                                    <dd>−30 сом</dd>
-                                                </div>
-                                            </dl>
+                                            </div>
+                                        </div>
+                                        <h6 class="item__title text-16">
+                                            <a href="#">Силиконовый чехол картхолдер (отверстия) для карт, прозрачный
+                                                кейс
+                                                бампер на Apple iPhone XR, MobiSafe</a>
+                                        </h6>
+                                        <dl class="item__props text-13">
+                                            <div class="item__props-block">
+                                                <dt>Цвет</dt>
+                                                <dd>прозрачный</dd>
+                                            </div>
+                                        </dl>
+                                        <div class="item__location text-13">
+                                            Коледино WB
+                                        </div>
+                                        <div class="item__seller text-13 tooltip-wrapper">
+                                            OOO Мегапрофстиль
+                                            <div class="item__seller-tooltip-trigger tooltip-trigger test" tabindex="0">
+                                                <img src="./assets/icons/info.svg" alt="Информация"></div>
+                                            <div class="item__seller-tooltip tooltip">
+                                                <h5 class="heading-5">
+                                                    OOO «МЕГАПРОФСТИЛЬ»
+                                                </h5>
+                                                <p class="text-13">
+                                                    ОГРН: 5167746237148
+                                                </p>
+                                                <p class="text-13">
+                                                    129337, Москва, улица Красная Сосна, 2, корпус 1, стр. 1,
+                                                    помещение 2,
+                                                    офис 34
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="cart__item item">
-                            <div class="item__details">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" class="input-checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <div class="item__image">
-                                    <a href="#"><img src="./assets/images/product-image-2.png"
-                                            alt="Изображение товара"></a>
-                                </div>
-                                <div class="item__info">
-                                    <div class="item__price-mobile tooltip-wrapper">
+                                <div class="item__meta">
+                                    <div class="item__controls">
+                                        <div class="item__counter">
+                                            <button type="button" class="item__counter-minus"><span>−</span></button>
+                                            <input type="number" min="1" class="item__counter-input" value="200">
+                                            <button type="button" class="item__counter-plus"><span>+</span></button>
+                                        </div>
+                                        <div class="item__control-buttons control-buttons">
+                                            <button type="button" class="control-buttons__favorite" title="Сохранить">
+                                                <img src="/assets/icons/heart.svg" alt="Избранное">
+                                            </button>
+                                            <button type="button" class="control-buttons__delete" title="Удалить">
+                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="item__sum">
                                         <div class="item__sum-total">
                                             <h3 class="item__sum-total-value heading-3">
                                                 2 100 047
@@ -230,7 +308,7 @@
                                                 сом
                                             </h4>
                                         </div>
-                                        <div class="item__sum-discountless">
+                                        <div class="item__sum-discountless tooltip-wrapper">
                                             <span class="dotted line-through text-13 tooltip-trigger">2 300 047
                                                 сом</span>
                                             <div class="tooltip">
@@ -247,94 +325,96 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h6 class="item__title text-16">
-                                        <a href="#">Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс
-                                            бампер на Apple iPhone XR, MobiSafe</a>
-                                    </h6>
-                                    <dl class="item__props text-13">
-                                        <div class="item__props-block">
-                                            <dt>Цвет</dt>
-                                            <dd>прозрачный</dd>
-                                        </div>
-                                    </dl>
-                                    <div class="item__location text-13">
-                                        Коледино WB
-                                    </div>
-                                    <div class="item__seller text-13 tooltip-wrapper">
-                                        OOO Мегапрофстиль
-                                        <div class="item__seller-tooltip-trigger tooltip-trigger test" tabindex="0"><img
-                                                src="./assets/icons/info.svg" alt="Информация"></div>
-                                        <div class="item__seller-tooltip tooltip">
-                                            <h5 class="heading-5">
-                                                OOO «МЕГАПРОФСТИЛЬ»
-                                            </h5>
-                                            <p class="text-13">
-                                                ОГРН: 5167746237148
-                                            </p>
-                                            <p class="text-13">
-                                                129337, Москва, улица Красная Сосна, 2, корпус 1, стр. 1,
-                                                помещение 2,
-                                                офис 34
-                                            </p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="item__meta">
-                                <div class="item__controls">
-                                    <div class="item__counter">
-                                        <button type="button" class="item__counter-minus"><span>−</span></button>
-                                        <input type="number" min="1" class="item__counter-input" value="200">
-                                        <button type="button" class="item__counter-plus"><span>+</span></button>
+                            <div class="cart__item item">
+                                <div class="item__details">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="input-checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <div class="item__image">
+                                        <a href="#"><img src="./assets/images/product-image-3.png"
+                                                alt="Изображение товара"></a>
                                     </div>
-                                    <div class="item__control-buttons control-buttons">
-                                        <button type="button" class="control-buttons__favorite" title="Сохранить">
-                                            <img src="/assets/icons/heart.svg" alt="Избранное">
-                                        </button>
-                                        <button type="button" class="control-buttons__delete" title="Удалить">
-                                            <img src="/assets/icons/trash.svg" alt="Удалить">
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="item__sum">
-                                    <div class="item__sum-total">
-                                        <h3 class="item__sum-total-value heading-3">
-                                            2 100 047
-                                        </h3>
-                                        <h4 class="item__sum-total-currency heading-4">
-                                            сом
-                                        </h4>
-                                    </div>
-                                    <div class="item__sum-discountless tooltip-wrapper">
-                                        <span class="dotted line-through text-13 tooltip-trigger">2 300 047 сом</span>
-                                        <div class="tooltip">
-                                            <dl>
-                                                <div class="text-13">
-                                                    <dt>Скидка 55%</dt>
-                                                    <dd>−300 сом</dd>
+                                    <div class="item__info">
+                                        <div class="item__price-mobile tooltip-wrapper">
+                                            <div class="item__sum-total">
+                                                <h3 class="item__sum-total-value heading-3">
+                                                    494
+                                                </h3>
+                                                <h4 class="item__sum-total-currency heading-4">
+                                                    сом
+                                                </h4>
+                                            </div>
+                                            <div class="item__sum-discountless">
+                                                <span class="dotted line-through text-13 tooltip-trigger">950 сом</span>
+                                                <div class="tooltip">
+                                                    <dl>
+                                                        <div class="text-13">
+                                                            <dt>Скидка 55%</dt>
+                                                            <dd>−300 сом</dd>
+                                                        </div>
+                                                        <div class="text-13">
+                                                            <dt>Скидка покупателя 10%</dt>
+                                                            <dd>−30 сом</dd>
+                                                        </div>
+                                                    </dl>
                                                 </div>
-                                                <div class="text-13">
-                                                    <dt>Скидка покупателя 10%</dt>
-                                                    <dd>−30 сом</dd>
-                                                </div>
-                                            </dl>
+                                            </div>
+                                        </div>
+                                        <h6 class="item__title text-16">
+                                            <a href="#">Карандаши цветные Faber-Castell "Замок", набор 24 цвета,
+                                                заточенные,
+                                                шестигранные, Faber-Castell</a>
+                                        </h6>
+                                        <div class="item__location text-13">
+                                            Коледино WB
+                                        </div>
+                                        <div class="item__seller text-13 tooltip-wrapper">
+                                            OOO Вайлдберриз
+                                            <div class="item__seller-tooltip-trigger tooltip-trigger" tabindex="0"><img
+                                                    src="./assets/icons/info.svg" alt="Информация"></div>
+                                            <div class="item__seller-tooltip tooltip">
+                                                <h5 class="heading-5">
+                                                    OOO «ВАЙЛДБЕРРИЗ»
+                                                </h5>
+                                                <p class="text-13">
+                                                    ОГРН: 1067746062449
+                                                </p>
+                                                <p class="text-13">
+                                                    142181,
+                                                    Московская область,
+                                                    Г.О. ПОДОЛЬСК,
+                                                    Д КОЛЕДИНО,
+                                                    ТЕР. ИНДУСТРИАЛЬНЫЙ ПАРК
+                                                    КОЛЕДИНО,
+                                                    Д. 6, СТР. 1
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="cart__item item">
-                            <div class="item__details">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" class="input-checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <div class="item__image">
-                                    <a href="#"><img src="./assets/images/product-image-3.png"
-                                            alt="Изображение товара"></a>
-                                </div>
-                                <div class="item__info">
-                                    <div class="item__price-mobile tooltip-wrapper">
+                                <div class="item__meta">
+                                    <div class="item__controls">
+                                        <div class="item__counter">
+                                            <button type="button" class="item__counter-minus"><span>−</span></button>
+                                            <input type="number" min="1" class="item__counter-input" value="2">
+                                            <button type="button" class="item__counter-plus"><span>+</span></button>
+                                        </div>
+                                        <div class="item__remains text-13">
+                                            Осталось 2 шт.
+                                        </div>
+                                        <div class="item__control-buttons control-buttons">
+                                            <button type="button" class="control-buttons__favorite" title="Сохранить">
+                                                <img src="/assets/icons/heart.svg" alt="Избранное">
+                                            </button>
+                                            <button type="button" class="control-buttons__delete" title="Удалить">
+                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="item__sum">
                                         <div class="item__sum-total">
                                             <h3 class="item__sum-total-value heading-3">
                                                 494
@@ -343,7 +423,7 @@
                                                 сом
                                             </h4>
                                         </div>
-                                        <div class="item__sum-discountless">
+                                        <div class="item__sum-discountless tooltip-wrapper">
                                             <span class="dotted line-through text-13 tooltip-trigger">950 сом</span>
                                             <div class="tooltip">
                                                 <dl>
@@ -357,80 +437,6 @@
                                                     </div>
                                                 </dl>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <h6 class="item__title text-16">
-                                        <a href="#">Карандаши цветные Faber-Castell "Замок", набор 24 цвета, заточенные,
-                                            шестигранные, Faber-Castell</a>
-                                    </h6>
-                                    <div class="item__location text-13">
-                                        Коледино WB
-                                    </div>
-                                    <div class="item__seller text-13 tooltip-wrapper">
-                                        OOO Вайлдберриз
-                                        <div class="item__seller-tooltip-trigger tooltip-trigger" tabindex="0"><img
-                                                src="./assets/icons/info.svg" alt="Информация"></div>
-                                        <div class="item__seller-tooltip tooltip">
-                                            <h5 class="heading-5">
-                                                OOO «ВАЙЛДБЕРРИЗ»
-                                            </h5>
-                                            <p class="text-13">
-                                                ОГРН: 1067746062449
-                                            </p>
-                                            <p class="text-13">
-                                                142181,
-                                                Московская область,
-                                                Г.О. ПОДОЛЬСК,
-                                                Д КОЛЕДИНО,
-                                                ТЕР. ИНДУСТРИАЛЬНЫЙ ПАРК
-                                                КОЛЕДИНО,
-                                                Д. 6, СТР. 1
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item__meta">
-                                <div class="item__controls">
-                                    <div class="item__counter">
-                                        <button type="button" class="item__counter-minus"><span>−</span></button>
-                                        <input type="number" min="1" class="item__counter-input" value="2">
-                                        <button type="button" class="item__counter-plus"><span>+</span></button>
-                                    </div>
-                                    <div class="item__remains text-13">
-                                        Осталось 2 шт.
-                                    </div>
-                                    <div class="item__control-buttons control-buttons">
-                                        <button type="button" class="control-buttons__favorite" title="Сохранить">
-                                            <img src="/assets/icons/heart.svg" alt="Избранное">
-                                        </button>
-                                        <button type="button" class="control-buttons__delete" title="Удалить">
-                                            <img src="/assets/icons/trash.svg" alt="Удалить">
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="item__sum">
-                                    <div class="item__sum-total">
-                                        <h3 class="item__sum-total-value heading-3">
-                                            494
-                                        </h3>
-                                        <h4 class="item__sum-total-currency heading-4">
-                                            сом
-                                        </h4>
-                                    </div>
-                                    <div class="item__sum-discountless tooltip-wrapper">
-                                        <span class="dotted line-through text-13 tooltip-trigger">950 сом</span>
-                                        <div class="tooltip">
-                                            <dl>
-                                                <div class="text-13">
-                                                    <dt>Скидка 55%</dt>
-                                                    <dd>−300 сом</dd>
-                                                </div>
-                                                <div class="text-13">
-                                                    <dt>Скидка покупателя 10%</dt>
-                                                    <dd>−30 сом</dd>
-                                                </div>
-                                            </dl>
                                         </div>
                                     </div>
                                 </div>
