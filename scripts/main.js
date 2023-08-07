@@ -2,7 +2,7 @@ import handleOrderSubmit, { handleImmediatePaymentChange } from './components/or
 import { positionTooltip } from './components/tooltip.js';
 import { hideProducts } from './utils/hideProducts.js';
 import { throttle } from './utils/throttle.js';
-import { handleItnInputChange, handleTelInputChange, validateInput } from './utils/validation.js';
+import { handleTelInputChange, validateInput } from './utils/validation.js';
 
 const orderForm = document.querySelector('#make-order-form');
 const recepientForm = document.querySelector('#recepient-data');
@@ -20,8 +20,6 @@ recepientForm.querySelectorAll('input').forEach(input => {
 
     if (input.id === 'tel') {
         input.addEventListener('input', () => handleTelInputChange(input));
-    } else if (input.id === 'itn') {
-        input.addEventListener('input', () => handleItnInputChange(input));
     }
 })
 

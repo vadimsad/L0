@@ -51,7 +51,7 @@ export function validateInput(input) {
             isValid: (value) => value === '' || validationConditions['tel'].pattern.test(value),
         },
         'itn': {
-            isValid: (value) => value,
+            isValid: (value) => value.length <= 14,
         }
     };
 
@@ -75,14 +75,6 @@ export function handleTelInputChange(input) {
     const inputValue = input.value.replace(/\D/g, '');
     let formattedValue = formatTelNumber(inputValue);
     input.value = formattedValue;
-}
-
-export function handleItnInputChange(input) {
-    const maxlength = input.getAttribute('data-maxlength');
-
-    if (input.value.length > maxlength) {
-        input.value = input.value.slice(0, maxlength); 
-    }
 }
 
 function formatTelNumber(number) {
