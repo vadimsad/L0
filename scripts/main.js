@@ -1,3 +1,4 @@
+import { toggleProduct } from './components/cart.js';
 import { hideModal, showModal, unfixPageScroll } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { handleTabChange } from './components/tabs.js';
@@ -67,3 +68,35 @@ dialogs.forEach(dialog => {
 // Переключение вкладок
 const tabs = document.querySelectorAll('input[name="tab"]');
 tabs.forEach(tab => tab.onchange = handleTabChange);
+
+// Выбор товара
+const products = document.querySelectorAll('.cart__items .item');
+products.forEach(product => {
+    const productInput = product.querySelector('.input-checkbox');
+    productInput.addEventListener('change', () => toggleProduct(product))
+})
+
+const selectAllButton = document.querySelector('.cart #select-all');
+selectAllButton.addEventListener('change', () => {
+    const isChecked = selectAllButton.checked;
+
+    if (isChecked) {
+        products.forEach(product => {
+            const productInput = product.querySelector('.input-checkbox');
+
+            if (productInput.checked) return;
+
+            productInput.checked = true;
+            toggleProduct(product, true)
+        });
+    } else {
+        products.forEach(product => {
+            const productInput = product.querySelector('.input-checkbox');
+
+            if (!productInput.checked) return;
+
+            productInput.checked = false;
+            toggleProduct(product, false)
+        });
+    }
+})
