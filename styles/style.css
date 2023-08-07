@@ -14,6 +14,13 @@ html, body {
     height: 100%;
 }
 
+html.modal-shown {
+    position: fixed;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+}
+
 .wrapper {
     min-height: 100%;
     overflow: hidden;
@@ -210,8 +217,8 @@ input[type=number]{
     user-select: none;
 }
 
-.checkbox-label .input-radio:focus-visible ~ .checkmark-radio{
-    background-color: #ccc;
+.checkbox-label:focus-visible {
+    color: red;
 }
 
 .checkbox-label .input-radio,
@@ -257,7 +264,7 @@ input[type=number]{
     content: '';
     position: absolute;
     top: 5.5px;
-    left: 6px;
+    left: 5.5px;
     width: 9px;
     height: 9px;
     background-color: var(--system-white);
@@ -378,7 +385,7 @@ input[type=number]{
     bottom: 100%;
 }
 
-.payment-dialog {
+.dialog {
     width: 400px;
     height: 400px;
     padding: 0;
@@ -388,46 +395,24 @@ input[type=number]{
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.20);
 }
 
-.payment-dialog__wrapper {
-    height: 100%;
+.dialog::backdrop {
+    overflow: hidden;
+    background: rgba(5, 0, 10, 0.30);
+}
+
+.dialog__wrapper {
+    min-height: 100%;
     padding: 24px;
     padding-top: 16px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
-.payment-dialog form {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-}
-
-.payment-dialog .payment-dialog__header {
+.dialog__header {
     margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
-}
-
-.payment-dialog .payment-dialog__close img {
-    display: block;
-}
-
-.payment-dialog label {
-    display: flex;
-    gap: 8px;
-}
-
-.payment-dialog label:not(:last-of-type) {
-    margin-bottom: 20px;
-}
-
-.payment-dialog__inputs {
-    flex: 1 0 295px;
-}
-
-.payment-dialog .button-primary {
-    width: max-content;
-
 }
 
 .button-primary {
@@ -454,6 +439,29 @@ input[type=number]{
 @media(max-width:560px) {
     .heading-3 {
         font-size: 16px;
+    }
+
+    .dialog {
+        width: 100%;
+        height: 100%;
+        max-width: initial;
+        max-height: initial;
+        border-radius: 0;
+    }
+
+    .dialog__wrapper {
+        padding: 16px;
+    }
+
+    .dialog .dialog__header .heading-3 {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.2px;
+    }
+
+    .dialog .button-primary {
+        width: auto;
     }
 }
 
@@ -851,7 +859,7 @@ input[type=number]{
     border: none;
     margin: 0;
     padding: 0;
-    margin-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .item__counter-plus {
@@ -905,7 +913,7 @@ input[type=number]{
 .item__sum-discountless .tooltip {
     width: 240px;
     top: 140%;
-    right: -15px;
+    right: 10px;
 }
 
 .item__sum-discountless .tooltip-top {
@@ -1165,8 +1173,8 @@ input[type=number]{
     .item__counter-input {
         width: 40%;
         flex: initial;
-        margin-bottom: 3px;
         font-size: 14px;
+        padding-bottom: 2px;
     }
 
     .item__counter-plus {
@@ -1756,4 +1764,145 @@ label.invalid input.shake ~ span{
     25%{transform:translate(6px)}
     50%{transform:translate(-6px)}
     75%{transform:translate(6px)}
+}
+
+.payment-dialog form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.payment-dialog .payment-dialog__header {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-dialog .payment-dialog__close img {
+    display: block;
+}
+
+.payment-dialog label {
+    display: flex;
+    gap: 8px;
+}
+
+.payment-dialog label:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+.payment-dialog__inputs {
+    flex: 1;
+    margin-bottom: 15px;
+}
+
+.payment-dialog .button-primary {
+    width: max-content;
+
+}
+
+.delivery-dialog {
+    width: 450px;
+    height: 500px;
+}
+
+.delivery-dialog__tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 26px;
+}
+
+.delivery-dialog__tab {
+    flex: 1;
+    border-radius: 20px;
+    border: 2px solid rgba(203, 17, 171, 0.15);
+    background: var(--text-white, #FFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 0 11px 0;
+    transition: border 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+.delivery-dialog__tab:has(input:checked) {
+    border: 2px solid #CB11AB;
+}
+
+.delivery-dialog__tab input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.delivery-dialog__form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.delivery-dialog__form h6 {
+    margin-bottom: 8px;
+}
+
+.delivery-dialog__form .button-primary {
+    width: max-content;
+}
+
+.delivery-dialog-addresses {
+    flex: 1;
+    margin-bottom: 15px;
+}
+
+.delivery-dialog-addresses.hidden {
+    display: none;
+}
+
+.delivery-dialog-addresses .delivery__delete img {
+    filter: invert(67%) sepia(6%) saturate(136%) hue-rotate(202deg) brightness(96%) contrast(89%);
+}
+
+.delivery-dialog-addresses .delivery__delete:hover img,
+.delivery-dialog-addresses .delivery__delete:focus-visible img {
+    filter: invert(37%) sepia(34%) saturate(3405%) hue-rotate(348deg) brightness(99%) contrast(95%);
+}
+
+.delivery-dialog__address {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.delivery-dialog__address-description {
+    margin-left: 16px;
+    position: relative;
+    color: var(--system-gray);
+}
+
+.delivery-dialog__address-description .rating {
+    color: initial;
+}
+
+.delivery-dialog__address-description .rating::before {
+    content: url(../assets/icons/star.svg);
+    position: absolute;
+    top: 2px;
+    left: -16px;
+}
+
+.delivery-dialog__address .checkmark-radio {
+    top: 0;
+    transform: translateY(10%);
+}
+
+.delivery-dialog__address:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+@media(max-width:560px) {
+    .delivery-dialog {
+        width: auto;
+        height: auto;
+    }
 }

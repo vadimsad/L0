@@ -565,7 +565,8 @@
                     <div class="cart__shipping content-box">
                         <div class="cart__shipping-title title-block">
                             <h2 class="heading-2">Способ доставки</h2>
-                            <button type="button" class="cart__shipping-edit text-16 weight-700">
+                            <button type="button" class="cart__shipping-edit text-16 weight-700"
+                                data-modal="delivery-modal">
                                 Изменить
                             </button>
                         </div>
@@ -750,7 +751,8 @@
                             <div class="main__shipping-delivery">
                                 <div class="main__shipping-title title-block">
                                     <h4 class="heading-4">Доставка в пункт выдачи</h4>
-                                    <button type="button"><img src="./assets/icons/pen.svg" alt="Изменить"></button>
+                                    <button type="button" data-modal='delivery-modal'><img src="./assets/icons/pen.svg"
+                                            alt="Изменить"></button>
                                 </div>
                                 <div class="main__shipping-address text-13">
                                     Бишкек, улица Ахматбека Суюмбаева, 12/1
@@ -816,18 +818,18 @@
             </div>
         </footer>
     </div>
-    <dialog class="payment-dialog" id="payment-modal" aria-labelledby="payment-title">
-        <div class="payment-dialog__wrapper">
-            <div class="payment-dialog__header">
+    <dialog class="payment-dialog dialog" id="payment-modal" aria-labelledby="payment-title">
+        <div class="payment-dialog__wrapper dialog__wrapper">
+            <div class="payment-dialog__header dialog__header">
                 <h3 class="heading-3" id="payment-title">Способ оплаты
                 </h3>
-                <button type="button" class="payment-dialog__close" aria-label="Закрыть"
-                    onclick="this.closest('dialog').close()"><img src="./assets/icons/cross.svg" alt="Закрыть"></button>
+                <button type="button" class="payment-dialog__close" id="modal-close" aria-label="Закрыть"><img
+                        src="./assets/icons/cross.svg" alt="Закрыть"></button>
             </div>
             <form action="#">
                 <div class="payment-dialog__inputs">
                     <label class="checkbox-label">
-                        <input type="radio" name="radio" class="input-radio" id="option-1" checked>
+                        <input type="radio" name="card" class="input-radio" id="option-1" checked>
                         <span class="checkmark-radio"></span>
                         <div class="payment-info">
                             <div class="payment-info__logo"><img src="./assets/icons/mir.svg" alt="Мир">
@@ -837,7 +839,7 @@
                         </div>
                     </label>
                     <label class="checkbox-label">
-                        <input type="radio" name="radio" class="input-radio" id="option-2">
+                        <input type="radio" name="card" class="input-radio" id="option-2">
                         <span class="checkmark-radio"></span>
                         <div class="payment-info">
                             <div class="payment-info__logo"><img src="./assets/icons/visa.svg" alt="Мир">
@@ -847,7 +849,7 @@
                         </div>
                     </label>
                     <label class="checkbox-label">
-                        <input type="radio" name="radio" class="input-radio" id="option-3">
+                        <input type="radio" name="card" class="input-radio" id="option-3">
                         <span class="checkmark-radio"></span>
                         <div class="payment-info">
                             <div class="payment-info__logo"><img src="./assets/icons/mastercard.svg" alt="Мир">
@@ -857,7 +859,7 @@
                         </div>
                     </label>
                     <label class="checkbox-label">
-                        <input type="radio" name="radio" class="input-radio" id="option-4">
+                        <input type="radio" name="card" class="input-radio" id="option-4">
                         <span class="checkmark-radio"></span>
                         <div class="payment-info">
                             <div class="payment-info__logo"><img src="./assets/icons/maestro.svg" alt="Мир">
@@ -866,6 +868,105 @@
                                 1234</span>
                         </div>
                     </label>
+                </div>
+                <button type="submit" class="button-primary">Выбрать</button>
+            </form>
+        </div>
+    </dialog>
+    <dialog class="delivery-dialog dialog" id="delivery-modal" aria-labelledby="delivery-title">
+        <div class="delivery-dialog__wrapper dialog__wrapper">
+            <div class="delivery-dialog__header dialog__header">
+                <h3 class="heading-3" id="delivery-title">Способ доставки
+                </h3>
+                <button type="button" class="delivery-dialog__close" id="modal-close" aria-label="Закрыть"><img
+                        src="./assets/icons/cross.svg" alt="Закрыть"></button>
+            </div>
+            <div class="delivery-dialog__tabs">
+                <label class="delivery-dialog__tab text-13 weight-700">
+                    <input type="radio" name="tab" id="pickup" checked>
+                    В пункт выдачи
+                </label>
+                <label class="delivery-dialog__tab text-13 weight-700">
+                    <input type="radio" name="tab" id="courier">
+                    Курьером
+                </label>
+            </div>
+            <form action="#" class="delivery-dialog__form">
+                <div class="delivery-dialog-addresses pickup">
+                    <h6 class="text-13 weight-700">
+                        Мои адреса
+                    </h6>
+                    <div class="delivery-dialog__address">
+                        <label class="checkbox-label">
+                            <input type="radio" name="address" class="input-radio" id="option-1">
+                            <span class="checkmark-radio"></span>
+                            <p class="text-16">г. Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</p>
+                            <span class="delivery-dialog__address-description text-13"><span class="rating"></span>
+                                Пункт выдачи</span>
+                        </label>
+                        <button type="button" class="delivery__delete" title="Удалить">
+                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                        </button>
+                    </div>
+                    <div class="delivery-dialog__address">
+                        <label class="checkbox-label">
+                            <input type="radio" name="address" class="input-radio" id="option-2">
+                            <span class="checkmark-radio"></span>
+                            <p class="text-16">г. Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1</p>
+                            <span class="delivery-dialog__address-description text-13"><span class="rating">4.99</span>
+                                Пункт выдачи</span>
+                        </label>
+                        <button type="button" class="delivery__delete" title="Удалить">
+                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                        </button>
+                    </div>
+                    <div class="delivery-dialog__address">
+                        <label class="checkbox-label">
+                            <input type="radio" name="address" class="input-radio" id="option-3">
+                            <span class="checkmark-radio"></span>
+                            <p class="text-16">г. Бишкек, улица Табышалиева, д. 57</p>
+                            <span class="delivery-dialog__address-description text-13"><span class="rating">4.99</span>
+                                Пункт выдачи</span>
+                        </label>
+                        <button type="button" class="delivery__delete" title="Удалить">
+                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                        </button>
+                    </div>
+                </div>
+                <div class="delivery-dialog-addresses hidden courier">
+                    <h6 class="text-13 weight-700">
+                        Мои адреса
+                    </h6>
+                    <div class="delivery-dialog__address">
+                        <label class="checkbox-label">
+                            <input type="radio" name="address" class="input-radio" id="option-1">
+                            <span class="checkmark-radio"></span>
+                            <p class="text-16">Бишкек, улица Табышалиева, 57</p>
+                        </label>
+                        <button type="button" class="delivery__delete" title="Удалить">
+                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                        </button>
+                    </div>
+                    <div class="delivery-dialog__address">
+                        <label class="checkbox-label">
+                            <input type="radio" name="address" class="input-radio" id="option-2">
+                            <span class="checkmark-radio"></span>
+                            <p class="text-16">Бишкек, улица Жукеева-Пудовкина, 77/1</p>
+                        </label>
+                        <button type="button" class="delivery__delete" title="Удалить">
+                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                        </button>
+                    </div>
+                    <div class="delivery-dialog__address">
+                        <label class="checkbox-label">
+                            <input type="radio" name="address" class="input-radio" id="option-3">
+                            <span class="checkmark-radio"></span>
+                            <p class="text-16">Бишкек, микрорайон Джал, улица Ахунбаева Исы, 67/1</p>
+                        </label>
+                        <button type="button" class="delivery__delete" title="Удалить">
+                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" class="button-primary">Выбрать</button>
             </form>
