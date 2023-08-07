@@ -1,3 +1,4 @@
+import { showModal } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { positionTooltip } from './components/tooltip.js';
 import { hideProducts } from './utils/hideProducts.js';
@@ -58,3 +59,13 @@ hideButtons.forEach(button => {
     const productsBlock = button.closest('.cart__controls').nextElementSibling;
     button.addEventListener('click', () => hideProducts(button, productsBlock))
 })
+
+
+const modalTriggers = document.querySelectorAll('[data-modal]');
+modalTriggers.forEach(modalTrigger => modalTrigger.onclick = showModal);
+
+
+const dialog = document.querySelector('.payment-dialog');
+const dialogContent = document.querySelector('.payment-dialog__wrapper');
+dialogContent.addEventListener('click', (e) => e.stopPropagation());
+dialog.addEventListener('click', (e) => e.target.close());

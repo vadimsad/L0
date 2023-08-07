@@ -210,10 +210,27 @@ input[type=number]{
     user-select: none;
 }
 
+.checkbox-label .input-radio:focus-visible ~ .checkmark-radio{
+    background-color: #ccc;
+}
+
+.checkbox-label .input-radio,
 .checkbox-label .input-checkbox {
     position: absolute;
     z-index: -1;
     opacity: 0;
+}
+
+.checkbox-label .checkmark-radio {
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+    background-color: var(--system-white);
 }
 
 .checkbox-label .checkmark {
@@ -227,8 +244,24 @@ input[type=number]{
     background-color: var(--system-white);
 }
 
+.checkbox-label:hover input ~ .checkmark-radio,
 .checkbox-label:hover input ~ .checkmark {
     background-color: #ccc;
+}
+
+.checkbox-label input:checked ~ .checkmark-radio {
+    background-color: var(--magenta);
+}
+
+.checkbox-label input:checked ~ .checkmark-radio::after {
+    content: '';
+    position: absolute;
+    top: 5.5px;
+    left: 6px;
+    width: 9px;
+    height: 9px;
+    background-color: var(--system-white);
+    border-radius: 100%;
 }
 
 .checkbox-label input:checked ~ .checkmark {
@@ -296,7 +329,13 @@ input[type=number]{
 }
 
 .payment-info .payment-info__logo {
-    padding: 7.33px 1px;
+    width: 32px;
+    height: 24px;
+    display: flex;
+    border-radius: 4px;
+    background: var(--smoky);
+    justify-content: center;
+    align-items: center;
     border-radius: 4px;
     background: var(--smoky);
 }
@@ -337,6 +376,66 @@ input[type=number]{
 .tooltip-top {
     top: initial;
     bottom: 100%;
+}
+
+.payment-dialog {
+    width: 400px;
+    height: 400px;
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    background: var(--system-white);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.20);
+}
+
+.payment-dialog__wrapper {
+    height: 100%;
+    padding: 24px;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-dialog form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.payment-dialog .payment-dialog__header {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-dialog .payment-dialog__close img {
+    display: block;
+}
+
+.payment-dialog label {
+    display: flex;
+    gap: 8px;
+}
+
+.payment-dialog label:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+.payment-dialog__inputs {
+    flex: 1 0 295px;
+}
+
+.payment-dialog .button-primary {
+    width: max-content;
+
+}
+
+.button-primary {
+    padding: 10px 32px;
+    border-radius: 8px;
+    background: var(--magenta);
+    color: var(--system-white);
+    font-weight: 700;
 }
 
 @media(max-width: 767.98px) {
@@ -865,12 +964,24 @@ input[type=number]{
     transition: transform 0.2s ease-in-out;
 }
 
+.cart__controls .cart__controls-items-count {
+    display: none;
+}
+
+.cart__controls:has(.cart__controls-show.hidden) .cart__controls-items-count {
+    display: block;
+}
+
+.cart__controls:has(.cart__controls-show.hidden) .checkbox-label {
+    display: none;
+}
+
 .cart__items {
     margin-bottom: 32px;
     display: grid;
     grid-template-rows: 1fr;
     overflow: hidden;
-    transition: 1s;
+    transition: 0.5s;
 }
 
 .cart__items.hidden {
@@ -881,7 +992,7 @@ input[type=number]{
 .cart__items .cart__items-wrapper {
     min-height: 0;
     visibility: visible;
-    transition: visibility 1s;
+    transition: visibility 0.5s;
 }
 
 .cart__items.hidden .cart__items-wrapper {
@@ -1077,6 +1188,24 @@ input[type=number]{
 
 .cart__missing {
     margin-bottom: 38px;
+    display: grid;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.cart__missing .cart__missing-wrapper {
+    min-height: 0;
+    visibility: visible;
+    transition: visibility 0.5s;
+}
+
+.cart__missing.hidden {
+    grid-template-rows: 0fr;
+}
+
+.cart__missing.hidden .cart__missing-wrapper {
+    visibility: hidden;
 }
 
 .cart__missing .item--missing .text-16,
@@ -1532,11 +1661,6 @@ input[type=number]{
 .main__total-submit {
     width: 100%;
     margin: 0 auto;
-    padding: 10px 32px;
-    border-radius: 8px;
-    background: var(--magenta);
-    color: var(--system-white);
-    font-weight: 700;
 }
 
 .main__agreement {
