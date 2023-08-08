@@ -128,9 +128,12 @@ export function handleCountInput(event) {
 
 export function handleCountChange(event) {
     const productID = event.target.closest('.cart__item.item').dataset.id;
+    const maxValue = cartState.products.find(product => product.id == productID)?.stock || Infinity;
 
     if (event.target.value == '' || event.target.value == 0) {
         event.target.value = 1;
+    } else if (event.target.value > maxValue) {
+        event.target.value = maxValue;
     } else {
         event.target.value = parseInt(event.target.value);
     }
@@ -235,13 +238,15 @@ function updateShippingInfo() {
 }
 
 function changeCount(event, increment) {
+    const id = event.target.closest('.cart__item.item').dataset.id;
     const input = event.target.closest('.item__counter').querySelector('.item__counter-input');
     const currentValue = parseInt(input.value);
     const minValue = parseInt(input.getAttribute('min')) || 1;
+    const maxValue = cartState.products.find(product => product.id == id)?.stock || Infinity;
     const maxValueLength = parseInt(input.getAttribute('maxlength')) || 3;
     
     const newValue = increment ? currentValue + 1 : currentValue - 1;
-    if (newValue >= minValue && newValue.toString().length <= maxValueLength) {
+    if (newValue >= minValue && newValue.toString().length <= maxValueLength && newValue <= maxValue) {
         input.value = newValue;
         const productID = input.closest('.cart__item.item').dataset.id;
         changeProductCount(productID, newValue);
