@@ -1,3 +1,5 @@
+import { formatNumber } from "../utils/formatNumber.js";
+
 const cartState = {
     products: [
         {
@@ -19,7 +21,7 @@ const cartState = {
             },
             stock: 2,
             count: 1,
-            isSelected: false,
+            isSelected: true,
             isFavorite: false,
         },
         {
@@ -27,7 +29,7 @@ const cartState = {
             title: 'Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс бампер на Apple iPhone XR, MobiSafe',
             price: {
                 discounted: 10500,
-                original: 11500
+                original: 11500,
             },
             properties: {
                 'Цвет': 'прозрачный',
@@ -39,8 +41,8 @@ const cartState = {
                 address: '129337, Москва, улица Красная Сосна, 2, корпус 1, стр. 1, помещение 2, офис 34',
             },
             stock: 1000,
-            count: 10,
-            isSelected: false,
+            count: 200,
+            isSelected: true,
             isFavorite: false,
         },
         {
@@ -59,11 +61,11 @@ const cartState = {
             },
             stock: 2,
             count: 2,
-            isSelected: false,
+            isSelected: true,
             isFavorite: false,
         },
     ],
-    selectedIds: []
+    selectedIds: [1, 2, 3]
 };
 
 const selectAllButton = document.querySelector('.cart #select-all');
@@ -92,7 +94,10 @@ export function toggleProduct(product, selectMode) {
         }
     }
 
+    console.log(cartState.selectedIds)
+    
     handleSelectAllInput(selectAllButton)
+    updateTotalPrice();
 }
 
 export function handleCountInput(event) {
@@ -140,12 +145,57 @@ export function decreaseCount(event) {
     changeCount(event, false);
 }
 
+function updateTotalPrice() {
+    const totalPriceElement = document.querySelector('.main__total-prices-value #price-total');
+    const totalCountElement = document.querySelector('.main__total-price #goods-count');
+    const priceOriginalElement = document.querySelector('.main__total-prices-value #price-discountless');
+    const priceDiscountElement = document.querySelector('.main__total-prices-value #price-discount');
+
+    const selectedProducts = cartState.products.filter(product => product.isSelected);
+
+    if (selectedProducts.length > 0) {
+        const totalDiscountedPrice = selectedProducts.reduce((acc, {price: {discounted}, count}) => {
+            return acc += discounted * count;
+        }, 0);
+        const totalOriginalPrice = selectedProducts.reduce((acc, {price: {original}, count}) => {
+            return acc += original * count;
+        }, 0);
+        const totalCount = selectedProducts.reduce((acc, {count}) => {
+            return acc += count;
+        }, 0)
+        const discount = totalDiscountedPrice - totalOriginalPrice;
+
+        totalPriceElement.textContent = formatNumber(totalDiscountedPrice);
+        totalCountElement.textContent = formatNumber(totalCount);
+        priceOriginalElement.textContent = formatNumber(totalOriginalPrice);
+        priceDiscountElement.textContent = formatNumber(discount);
+
+    } else {
+        totalPriceElement.textContent = 0;
+        totalCountElement.textContent = 0;
+        priceOriginalElement.textContent = 0;
+        priceDiscountElement.textContent = 0;
+    }
+}
+
+export function getFinalPrice() {
+    return cartState.products.filter(product => product.isSelected).reduce((acc, {price: {discounted}, count}) => {
+        return acc += discounted * count;
+    }, 0);
+}
+
+export function getTotalCount() {
+    return cartState.products.filter(product => product.isSelected).reduce((acc, {count}) => {
+        return acc += count;
+    }, 0)
+}
 
 function changeProductCount(productID, newCount) {
     const product = cartState.products.find(product => product.id == productID);
     product.count = newCount;
 
     updatePrice(product);
+    updateTotalPrice()
 }
 
 function updatePrice(product) {
@@ -183,8 +233,4 @@ function handleSelectAllInput(input) {
     } else {
         input.checked = false;
     }
-}
-
-function formatNumber(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
