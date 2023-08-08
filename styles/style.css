@@ -832,8 +832,8 @@ input[type=number]{
     letter-spacing: -0.2px;
 }
 
-.item__counter-minus:focus,
-.item__counter-plus:focus,
+.item__counter-minus:focus-visible,
+.item__counter-plus:focus-visible,
 .item__counter-minus:hover,
 .item__counter-plus:hover {
     background-color: #ccc;
@@ -902,7 +902,7 @@ input[type=number]{
     justify-content: end;
 }
 
-.item__sum-discountless span {
+.item__sum-discountless p {
     display: inline-block;
     position: relative;
     top: 4px;
@@ -1108,7 +1108,7 @@ input[type=number]{
         background-position: 0 75%;
     }
     
-    .item__sum-discountless span {
+    .item__sum-discountless p {
         top: 5px;
     }
 

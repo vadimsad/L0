@@ -1,4 +1,4 @@
-import { toggleProduct } from './components/cart.js';
+import { decreaseCount, handleCountChange, handleCountInput, increaseCount, toggleProduct } from './components/cart.js';
 import { hideModal, showModal, unfixPageScroll } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { handleTabChange } from './components/tabs.js';
@@ -99,4 +99,17 @@ selectAllButton.addEventListener('change', () => {
             toggleProduct(product, false)
         });
     }
+})
+
+// Изменение количества товара
+const counters = document.querySelectorAll('.item__counter');
+counters.forEach(counter => {
+    const input = counter.querySelector('input.item__counter-input');
+    const minusButton = counter.querySelector('.item__counter-minus');
+    const plusButton = counter.querySelector('.item__counter-plus');
+
+    input.oninput = handleCountInput;
+    input.onchange = handleCountChange;
+    minusButton.onclick = decreaseCount;
+    plusButton.onclick = increaseCount;
 })
