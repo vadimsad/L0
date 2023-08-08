@@ -285,7 +285,7 @@ input[type=number]{
 }
 
 .checkbox-label .checkmark:after {
-    left: 7.5px;
+    left: 7px;
     top: 4px;
     width: 4px;
     height: 8px;
@@ -489,6 +489,10 @@ input[type=number]{
     border: 1px solid rgba(255, 255, 255, 0.45);
 }
 
+.header__burger:hover {
+    border: 1px solid var(--system-white);
+}
+
 .header__burger img {
     display: block;
 }
@@ -510,10 +514,16 @@ input[type=number]{
 .header__search-form {
     flex: 1 1 auto;
     border-radius: 36px;
-    background: rgba(255, 255, 255, 0.20);
+    background-color: rgba(255, 255, 255, 0.20);
     display: flex;
     align-items: center;
     margin-right: 32px;
+    transition: background-color .3s ease 0s;
+}
+
+.header__search-form:focus-within,
+.header__search-form:hover {
+    background-color: rgba(255, 255, 255, 0.50);
 }
 
 .header__search-form:has(input:focus) {
@@ -534,6 +544,7 @@ input[type=number]{
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
+    cursor: pointer;
 }
 
 .header__search-form input:focus {
@@ -572,6 +583,24 @@ input[type=number]{
     font-size: 13px;
     line-height: 16px;
     text-decoration: none;
+}
+
+.header__link a {
+    transition: color 0.3s ease 0s;
+}
+
+.header__link a path {
+    transition: fill 0.3s ease 0s;
+}
+
+.header__link a:hover,
+.header__link a:focus-visible {
+    color: rgb(196, 196, 196);
+}
+
+.header__link a:hover path,
+.header__link a:focus-visible path {
+    fill: rgb(196, 196, 196);
 }
 
 .header__link_profile svg {
