@@ -1,5 +1,9 @@
 import { formatNumber } from "../utils/formatNumber.js";
 
+const DEFAULT_WORKTIME = 'Ежедневно с 10 до 21';
+const DEFAULT_RATING = 5.00;
+const DEFAULT_CARD_EXPIRY = '01/42';
+
 const cartState = {
     products: [
         {
@@ -65,7 +69,18 @@ const cartState = {
             isFavorite: false,
         },
     ],
-    selectedIds: [1, 2, 3]
+    selectedIds: [1, 2, 3],
+    shipping: {
+        type: 'pickup',
+        address: 'Бишкек, улица Ахматбека Суюмбаева, 12/1',
+        rating: 4.99,
+        wortTime: 'Ежедневно с 10 до 21',
+    },
+    payment: {
+        cardNumber: '1234 56•• •••• 1234',
+        cardExpiry: '01/30',
+        imageSource: './assets/icons/mir.svg',
+    }
 };
 
 const selectAllButton = document.querySelector('.cart #select-all');
@@ -73,6 +88,8 @@ const selectAllButton = document.querySelector('.cart #select-all');
 export function toggleProduct(product, selectMode) {
     const productID = product.dataset.id;
     const productState = cartState.products.find(product => product.id == productID);
+
+    if (!productState) return;
 
     if (selectMode === undefined) {
         const newState = !productState.isSelected;
@@ -93,9 +110,7 @@ export function toggleProduct(product, selectMode) {
             deselectProduct(productID);
         }
     }
-
-    console.log(cartState.selectedIds)
-    
+   
     handleSelectAllInput(selectAllButton)
     updateTotalPrice();
 }
@@ -123,6 +138,102 @@ export function handleCountChange(event) {
     changeProductCount(productID, event.target.value);
 }
 
+export function toggleFavorite(event) {
+    const productElement = event.target.closest('.cart__item.item');
+    const productID = productElement.dataset.id;
+    const product = cartState.products.find(product => product.id == productID);
+    const button = event.currentTarget;
+
+    if (productID) {
+        product.isFavorite = !product.isFavorite;
+    }
+
+    button.classList.toggle('active');
+}
+
+export function deleteProduct(event) {
+    const productElement = event.target.closest('.cart__item.item');
+    const productID = productElement.dataset.id;
+
+    if (productID) {
+        cartState.products = cartState.products.filter(product => product.id != productID)
+    }
+
+    productElement.remove();
+    deselectProduct(productID);
+    updateTotalPrice();
+    updateCartLabels();
+}
+
+export function changePayment(event) {
+    event.preventDefault();
+
+    const dialog = event.target.closest('dialog');
+    const newCardNumber = event.target.querySelector('input:checked ~ .payment-info .payment-info__number').textContent;
+    const newCardExpiry = event.target.querySelector('input:checked').dataset.expiry || DEFAULT_CARD_EXPIRY;
+    const newImage = event.target.querySelector('input:checked ~ .payment-info .payment-info__logo img').getAttribute('src');
+
+    cartState.payment.cardNumber = newCardNumber;
+    cartState.payment.cardExpiry = newCardExpiry;
+    cartState.payment.imageSource = newImage;
+    updatePaymentInfo();
+    dialog.close();
+}
+
+function updatePaymentInfo() {
+    const paymentImageMain = document.querySelector('.main__payment-method-logo img');
+    const paymentImage = document.querySelector('.cart__payment-method-logo img');
+    const paymentCardNumberMain = document.querySelector('.main__payment-method-number');
+    const paymentCardNumber = document.querySelector('.cart__payment-method-number');
+    const paymentCardExpiry = document.querySelector('.cart__payment-method-expiry');
+
+    paymentImageMain.src = cartState.payment.imageSource;
+    paymentImage.src = cartState.payment.imageSource;
+    paymentCardNumberMain.textContent = cartState.payment.cardNumber;
+    paymentCardNumber.textContent = cartState.payment.cardNumber;
+    paymentCardExpiry.textContent = cartState.payment.cardExpiry;
+}
+
+export function changeShippingAddress(event) {
+    event.preventDefault();
+
+    const dialog = event.target.closest('dialog');
+    const newType = event.target.querySelector('input:checked').dataset.type;
+    const newAddress = event.target.querySelector('input:checked ~ p.text-16').textContent;
+    const newRating = event.target.querySelector('input:checked ~ .delivery-dialog__address-description .rating')?.textContent || DEFAULT_RATING;
+    const newWorkTime = DEFAULT_WORKTIME;
+    
+    cartState.shipping = {type: newType, address: newAddress, rating: newRating, workTime: newWorkTime};
+    updateShippingInfo();
+    dialog.close();
+}
+
+function updateShippingInfo() {
+    const addressElement = document.querySelector('.main__shipping-address');
+    const shippingInfo = document.querySelector('.shipping-info__block-address');
+    const shippingInfoType = shippingInfo.querySelector('dt');
+    const shippingInfoAddress = shippingInfo.querySelector('dd p');
+    const shippingInfoRating = shippingInfo.querySelector('.shipping-info__rating');
+    const shippingInfoWorkTime = shippingInfo.querySelector('.shipping-info__worktime');
+
+    addressElement.textContent = cartState.shipping.address;
+    
+    switch (cartState.shipping.type) {
+        case 'pickup': {
+            shippingInfoType.textContent = 'Пункт выдачи';
+            break;
+        }
+        case 'courier': {
+            shippingInfoType.textContent = 'Доставит курьер';
+            break;
+        }
+    }
+
+    shippingInfoRating.textContent = cartState.shipping.rating;
+    shippingInfoAddress.textContent = cartState.shipping.address;
+    shippingInfoWorkTime.textContent = cartState.shipping.workTime;
+}
+
 function changeCount(event, increment) {
     const input = event.target.closest('.item__counter').querySelector('.item__counter-input');
     const currentValue = parseInt(input.value);
@@ -143,6 +254,15 @@ export function increaseCount(event) {
 
 export function decreaseCount(event) {
     changeCount(event, false);
+}
+
+function updateCartLabels() {
+    const cartLabel = document.querySelector('.header__link_cart-label.item-label');
+    const cartLabelMobile = document.querySelector('.footer__menu-link-label.item-label');
+    const productsRemains = cartState.products.length;
+
+    cartLabel.textContent = productsRemains;
+    cartLabelMobile.textContent = productsRemains;
 }
 
 function updateTotalPrice() {

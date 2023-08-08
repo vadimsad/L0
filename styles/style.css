@@ -302,12 +302,16 @@ input[type=number]{
     gap: 16px;
 }
 
-.control-buttons__favorite:focus,
+.control-buttons .control-buttons__favorite.active {
+    filter: invert(22%) sepia(87%) saturate(5670%) hue-rotate(299deg) brightness(87%) contrast(101%);
+}
+
+.control-buttons__favorite:focus-visible,
 .control-buttons__favorite:hover {
     filter: invert(22%) sepia(87%) saturate(5670%) hue-rotate(299deg) brightness(87%) contrast(101%);
 }
 
-.control-buttons__delete:focus,
+.control-buttons__delete:focus-visible,
 .control-buttons__delete:hover {
     filter: invert(37%) sepia(34%) saturate(3405%) hue-rotate(348deg) brightness(99%) contrast(95%);
 }
@@ -1762,6 +1766,7 @@ input[type=number]{
     backdrop-filter: blur(2.5px);
     position: sticky;
     bottom: 0;
+    z-index: 15;
 }
 
 .footer__menu-link {

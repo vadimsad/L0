@@ -1,4 +1,4 @@
-import { decreaseCount, handleCountChange, handleCountInput, increaseCount, toggleProduct } from './components/cart.js';
+import { changePayment, changeShippingAddress, decreaseCount, deleteProduct, handleCountChange, handleCountInput, increaseCount, toggleFavorite, toggleProduct } from './components/cart.js';
 import { hideModal, showModal, unfixPageScroll } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { handleTabChange } from './components/tabs.js';
@@ -113,3 +113,19 @@ counters.forEach(counter => {
     minusButton.onclick = decreaseCount;
     plusButton.onclick = increaseCount;
 })
+
+// Добавление товаров в избранное
+const favoriteButtons = document.querySelectorAll('.control-buttons__favorite');
+favoriteButtons.forEach(button => button.addEventListener('click', toggleFavorite))
+
+// Удаление товаров
+const deleteButtons = document.querySelectorAll('.control-buttons__delete');
+deleteButtons.forEach(button => button.addEventListener('click', deleteProduct))
+
+// Изменение адреса доставки
+const shippingForm = document.querySelector('.delivery-dialog__form');
+shippingForm.addEventListener('submit', changeShippingAddress);
+
+// Изменение способа оплаты
+const paymentForm = document.querySelector('.payment-dialog form');
+paymentForm.addEventListener('submit', changePayment);
