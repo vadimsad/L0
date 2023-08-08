@@ -23,7 +23,6 @@ html.modal-shown {
 
 .wrapper {
     min-height: 100%;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -325,7 +324,7 @@ input[type=number]{
     background: var(--system-red);
     font-size: 10px;
     font-weight: 700;
-    line-height: 17px;
+    line-height: 13px;
     color: var(--system-white);
 }
 
@@ -1744,13 +1743,42 @@ input[type=number]{
 
 .footer__container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 23px 0px;
+    padding: 23px 0;
 }
 
 .footer .text-13 {
     color: rgba(255, 255, 255, 0.70);
+}
+
+.footer__menu-mobile {
+    width: 100%;
+    padding: 14px 0;
+    display: none;
+    background: var(--system-white);
+    box-shadow: 0px -0.5px 0px 0px rgba(0, 0, 0, 0.30);
+    backdrop-filter: blur(2.5px);
+    position: sticky;
+    bottom: 0;
+}
+
+.footer__menu-link {
+    position: relative;
+}
+
+.footer__menu-link-label {
+    top: -1px;
+    right: -6px;
+}
+
+@media(max-width:767.98px) {
+    .footer__menu-mobile {
+        display: flex;
+        justify-content: center;
+        gap: 38.5px;
+    }
 }
 
 /* Other */
