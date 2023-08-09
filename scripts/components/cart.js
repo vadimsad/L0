@@ -1,3 +1,4 @@
+import { chooseWordForm } from "../utils/chooseWordForm.js";
 import { formatNumber } from "../utils/formatNumber.js";
 
 const DEFAULT_WORKTIME = 'Ежедневно с 10 до 21';
@@ -189,14 +190,25 @@ export function deleteProduct(event) {
     const productID = productElement.dataset.id;
 
     if (productID) {
-        cartState.products = cartState.products.filter(product => product.id != productID)
+        cartState.products = cartState.products.filter(product => product.id != productID);
+
+        deselectProduct(productID);
+        updateTotalPrice();
+        updateShippingDate();
+        updateCartLabels();
+    } else {
+        const missingTitleElement = document.querySelector('#missing-title');
+        const missingNumberElement = document.querySelector('#missing-number');
+        const missingTextElement = document.querySelector('#missing-text');
+        const currentNumber = missingNumberElement.textContent;
+        const newNumber = currentNumber - 1;
+        
+        missingTitleElement.textContent = chooseWordForm(newNumber, ['Отсутствует', 'Отсутствуют', 'Отсутствуют']);
+        missingNumberElement.textContent = newNumber;
+        missingTextElement.textContent = chooseWordForm(newNumber, ['товар', 'товара', 'товаров']);
     }
 
     productElement.remove();
-    deselectProduct(productID);
-    updateTotalPrice();
-    updateShippingDate();
-    updateCartLabels();
 }
 
 export function changePayment(event) {
@@ -401,6 +413,7 @@ function updateCartLabels() {
 function updateTotalPrice() {
     const totalPriceElement = document.querySelector('.main__total-prices-value #price-total');
     const totalCountElement = document.querySelector('.main__total-price #goods-count');
+    const totalCountTextElement = document.querySelector('.main__total-price #goods-text');
     const priceOriginalElement = document.querySelector('.main__total-prices-value #price-discountless');
     const priceDiscountElement = document.querySelector('.main__total-prices-value #price-discount');
 
@@ -420,6 +433,7 @@ function updateTotalPrice() {
 
         totalPriceElement.textContent = formatNumber(totalDiscountedPrice);
         totalCountElement.textContent = formatNumber(totalCount);
+        totalCountTextElement.textContent = chooseWordForm(totalCount, ['товар', 'товара', 'товаров'])
         priceOriginalElement.textContent = formatNumber(totalOriginalPrice);
         priceDiscountElement.textContent = formatNumber(discount);
 
