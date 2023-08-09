@@ -1,15 +1,19 @@
-import { cartState } from "./cart.js";
+import { cartState } from "../model.js";
 
+// Позиционирование подсказки
 export function positionTooltip(tooltipTrigger) {
     const tooltip = tooltipTrigger.closest('.tooltip-wrapper').querySelector('.tooltip');
     const tooltipHeight = tooltip.getBoundingClientRect().height;
     const tooltipTriggerRect = tooltipTrigger.getBoundingClientRect();
 
+    // Вычисление расстояния до нижней границы окна
     const distanceToBottom = window.innerHeight - (tooltipTriggerRect.top + tooltipTriggerRect.height);
 
+    // Применение класса для отображения подсказки сверху, если она не помещается снизу
     tooltip.classList.toggle("tooltip-top", distanceToBottom < tooltipHeight);
 }
 
+// Создание подсказки со скидками
 export function createDiscountTooltip(tooltip) {
     const productID = tooltip.closest('.cart__item').dataset.id;
     const product = cartState.products.find(product => product.id == productID);
@@ -17,6 +21,7 @@ export function createDiscountTooltip(tooltip) {
     const productPrice = product.price.original;
     const discounts = product.discounts;
 
+    // Создание блоков с информацией о скидках
     const discountBlocks = discounts.map(discount => {
         return (
             `
@@ -25,8 +30,9 @@ export function createDiscountTooltip(tooltip) {
                 <dd>−${Math.round(productPrice * discount.value)} сом</dd>
             </div>
             `
-        )
+        );
     }).join('');
 
+    // Вставка блоков с информацией о скидках внутрь подсказки
     tooltip.querySelector('dl').innerHTML = discountBlocks;
 }

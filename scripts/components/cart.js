@@ -1,152 +1,16 @@
 import { chooseWordForm } from "../utils/chooseWordForm.js";
 import { formatNumber } from "../utils/formatNumber.js";
-import { handleImmediatePaymentChange } from "./orderForm.js";
+import { cartState } from "../model.js";
 
+// Константы по умолчанию
 const DEFAULT_WORKTIME = 'Ежедневно с 10 до 21';
 const DEFAULT_RATING = 5.00;
 const DEFAULT_CARD_EXPIRY = '01/42';
 
-export const cartState = {
-    products: [
-        {
-            id: 1,
-            title: 'Футболка UZcotton мужская',
-            price: {
-                discounted: 368,
-                original: 1051
-            },
-            discounts: [
-                {
-                    name: 'Скидка 55%',
-                    value: 0.55
-                },
-                {
-                    name: 'Скидка покупателя 10%',
-                    value: 0.1
-                },
-            ],
-            properties: {
-                'Цвет': 'белый',
-                'Размер': '56',
-            },
-            location: 'Коледино WB',
-            supplier: {
-                title: 'OOO «Вайлдберриз»',
-                PSRNSP: '1067746062449',
-                address: '142181, Московская область, Г.О. ПОДОЛЬСК, Д КОЛЕДИНО, ТЕР. ИНДУСТРИАЛЬНЫЙ ПАРК КОЛЕДИНО, Д. 6, СТР. 1',
-            },
-            shippingSchedule: [
-                {
-                    date: '5—6 февраля',
-                    maxQuantity: 2
-                }
-            ],
-            stock: 2,
-            count: 1,
-            isSelected: true,
-            isFavorite: false,
-            imageSource: '../../assets/images/product-image-1.png',
-        },
-        {
-            id: 2,
-            title: 'Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс бампер на Apple iPhone XR, MobiSafe',
-            price: {
-                discounted: 4025,
-                original: 11500,
-            },
-            discounts: [
-                {
-                    name: 'Скидка 55%',
-                    value: 0.55
-                },
-                {
-                    name: 'Скидка покупателя 10%',
-                    value: 0.1
-                },
-            ],
-            properties: {
-                'Цвет': 'прозрачный',
-            },
-            location: 'Коледино WB',
-            supplier: {
-                title: 'OOO «МЕГАПРОФСТИЛЬ»',
-                PSRNSP: '5167746237148',
-                address: '129337, Москва, улица Красная Сосна, 2, корпус 1, стр. 1, помещение 2, офис 34',
-            },
-            shippingSchedule: [
-                {
-                    date: '5—6 февраля',
-                    maxQuantity: 184
-                },
-                {
-                    date: '7—8 февраля',
-                    maxQuantity: 200
-                },
-                {
-                    date: '9—10 февраля',
-                    maxQuantity: 616
-                },
-            ],
-            stock: 1000,
-            count: 200,
-            isSelected: true,
-            isFavorite: false,
-            imageSource: '../../assets/images/product-image-2.png',
-        },
-        {
-            id: 3,
-            title: 'Карандаши цветные Faber-Castell "Замок", набор 24 цвета, заточенные, шестигранные, Faber-Castell ',
-            price: {
-                discounted: 167,
-                original: 475
-            },
-            discounts: [
-                {
-                    name: 'Скидка 55%',
-                    value: 0.55
-                },
-                {
-                    name: 'Скидка покупателя 10%',
-                    value: 0.1
-                },
-            ],
-            properties: {},
-            location: 'Коледино WB',
-            supplier: {
-                title: 'OOO Вайлдберриз',
-                PSRNSP: '1067746062449',
-                address: '142181, Московская область, Г.О. ПОДОЛЬСК, Д КОЛЕДИНО, ТЕР. ИНДУСТРИАЛЬНЫЙ ПАРК КОЛЕДИНО, Д. 6, СТР. 1',
-            },
-            shippingSchedule: [
-                {
-                    date: '5—6 февраля',
-                    maxQuantity: 2
-                }
-            ],
-            stock: 2,
-            count: 2,
-            isSelected: true,
-            isFavorite: false,
-            imageSource: '../../assets/images/product-image-3.png',
-        },
-    ],
-    selectedIds: [1, 2, 3],
-    shipping: {
-        id: 'pickup-1',
-        type: 'pickup',
-        address: 'Бишкек, улица Ахматбека Суюмбаева, 12/1',
-        rating: 4.99,
-        wortTime: 'Ежедневно с 10 до 21',
-    },
-    payment: {
-        cardNumber: '1234 56•• •••• 1234',
-        cardExpiry: '01/30',
-        imageSource: './assets/icons/mir.svg',
-    }
-};
-
+// Получение кнопки "Выбрать все"
 const selectAllButton = document.querySelector('.cart #select-all');
 
+// Функция переключения товара (выбор/отмена выбора)
 export function toggleProduct(product, selectMode) {
     const productID = product.dataset.id;
     const productState = cartState.products.find(product => product.id == productID);
@@ -178,6 +42,7 @@ export function toggleProduct(product, selectMode) {
     updateTotalPrice();
 }
 
+// Обработчик ввода количества товара
 export function handleCountInput(event) {
     const input = event.target;
     const maxValueLength = parseInt(input.getAttribute('maxlength')) || 3;
@@ -189,6 +54,8 @@ export function handleCountInput(event) {
     input.value = trimmedValue;
 }
 
+
+// Обработчик изменения количества товара
 export function handleCountChange(event) {
     const productID = event.target.closest('.cart__item.item').dataset.id;
     const maxValue = cartState.products.find(product => product.id == productID)?.stock || Infinity;
@@ -204,6 +71,7 @@ export function handleCountChange(event) {
     changeProductCount(productID, event.target.value);
 }
 
+// Функция добавления в избранное
 export function toggleFavorite(event) {
     const productElement = event.target.closest('.cart__item.item');
     const productID = productElement.dataset.id;
@@ -217,6 +85,7 @@ export function toggleFavorite(event) {
     button.classList.toggle('active');
 }
 
+// Функция удаления товара
 export function deleteProduct(event) {
     const productElement = event.target.closest('.cart__item.item');
     const productID = productElement.dataset.id;
@@ -243,14 +112,17 @@ export function deleteProduct(event) {
     productElement.remove();
 }
 
+// Функция изменения способа оплаты
 export function changePayment(event) {
     event.preventDefault();
 
     const dialog = event.target.closest('dialog');
+    const newID = event.target.querySelector('input:checked').id;
     const newCardNumber = event.target.querySelector('input:checked ~ .payment-info .payment-info__number').textContent;
     const newCardExpiry = event.target.querySelector('input:checked').dataset.expiry || DEFAULT_CARD_EXPIRY;
     const newImage = event.target.querySelector('input:checked ~ .payment-info .payment-info__logo img').getAttribute('src');
 
+    cartState.payment.id = newID;
     cartState.payment.cardNumber = newCardNumber;
     cartState.payment.cardExpiry = newCardExpiry;
     cartState.payment.imageSource = newImage;
@@ -258,6 +130,7 @@ export function changePayment(event) {
     dialog.close();
 }
 
+// Обновление информации о способе оплаты
 function updatePaymentInfo() {
     const paymentImageMain = document.querySelector('.main__payment-method-logo img');
     const paymentImage = document.querySelector('.cart__payment-method-logo img');
@@ -272,6 +145,7 @@ function updatePaymentInfo() {
     paymentCardExpiry.textContent = cartState.payment.cardExpiry;
 }
 
+// Функция изменения адреса доставки
 export function changeShippingAddressCallback(event) {
     event.preventDefault();
 
@@ -287,6 +161,7 @@ export function changeShippingAddressCallback(event) {
     dialog.close();
 }
 
+// Функция изменения адреса доставки (вариант без события)
 export function changeShippingAddress(checkedInput) {
     const newID = checkedInput.id;
     const newType = checkedInput.dataset.type;
@@ -298,6 +173,7 @@ export function changeShippingAddress(checkedInput) {
     updateShippingInfo();
 }
 
+// Обновление информации о способе доставки
 function updateShippingInfo() {
     const addressElement = document.querySelector('.main__shipping-address');
     const shippingInfo = document.querySelector('.shipping-info__block-address');
@@ -324,6 +200,7 @@ function updateShippingInfo() {
     shippingInfoWorkTime.textContent = cartState.shipping.workTime;
 }
 
+// Обобщенная функция для изменения количества товара
 function changeCount(event, increment) {
     const id = event.target.closest('.cart__item.item').dataset.id;
     const input = event.target.closest('.item__counter').querySelector('.item__counter-input');
@@ -340,14 +217,17 @@ function changeCount(event, increment) {
     }
 }
 
+// Функция для увеличения количества товара
 export function increaseCount(event) {
     changeCount(event, true);
 }
 
+// Функция для уменьшения количества товара
 export function decreaseCount(event) {
     changeCount(event, false);
 }
 
+// Обновление даты доставки
 function updateShippingDate() {
     const productsToShip = cartState.products.map(({isSelected, id, count, shippingSchedule}) => {
         if (isSelected) {
@@ -394,6 +274,7 @@ function updateShippingDate() {
     updateShipmentDateInForm(dates);
 }
 
+// Обновление даты доставки в главной форме заказа
 function updateShipmentDateInForm(dates) {
     const datesString = Array.from(dates);
 
@@ -409,6 +290,7 @@ function updateShipmentDateInForm(dates) {
     document.querySelector('.main__shipping-date').textContent = `${minDate}-${maxDate} ${month}`;
 }
 
+// Расчет дат доставки для товара
 function calculateShippingDates({id, count, shippingSchedule}, dates) {
     let productsToShip = count;
 
@@ -445,6 +327,7 @@ function calculateShippingDates({id, count, shippingSchedule}, dates) {
     }
 }
 
+// Обновление иконок с количеством товара в корзине
 function updateCartLabels() {
     const cartLabel = document.querySelector('.header__link_cart-label.item-label');
     const cartLabelMobile = document.querySelector('.footer__menu-link-label.item-label');
@@ -454,6 +337,7 @@ function updateCartLabels() {
     cartLabelMobile.textContent = productsRemains;
 }
 
+// Обновление общей стоимости
 function updateTotalPrice() {
     const totalPriceElement = document.querySelector('.main__total-prices-value #price-total');
     const totalCountElement = document.querySelector('.main__total-price #goods-count');
@@ -494,18 +378,21 @@ function updateTotalPrice() {
     }
 }
 
+// Получение общей цены для оплаты
 export function getFinalPrice() {
     return cartState.products.filter(product => product.isSelected).reduce((acc, {price: {discounted}, count}) => {
         return acc += discounted * count;
     }, 0);
 }
 
+// Получение общего количества выбранных товаров
 export function getTotalCount() {
     return cartState.products.filter(product => product.isSelected).reduce((acc, {count}) => {
         return acc += +count;
     }, 0)
 }
 
+// Изменение количества товара
 function changeProductCount(productID, newCount) {
     const product = cartState.products.find(product => product.id == productID);
     product.count = newCount;
@@ -515,6 +402,7 @@ function changeProductCount(productID, newCount) {
     updateTotalPrice()
 }
 
+// Обновление цен на товар на странице
 function updatePrice(product) {
     const productElement = document.querySelector(`.item[data-id='${product.id}']`);
 
@@ -532,16 +420,19 @@ function updatePrice(product) {
     originalPriceElementMobile.textContent = newOriginalPrice;
 }
 
+// Выбор товара
 function selectProduct(id) {
     if (!cartState.selectedIds.find(selectedId => selectedId == id)) {
         cartState.selectedIds.push(id);
     }
 }
 
+// Отмена выбора товара
 function deselectProduct(id) {
     cartState.selectedIds = cartState.selectedIds.filter(selectedId => selectedId != id);
 }
 
+// Обработка состояния инпута выбора всех товаров
 function handleSelectAllInput(input) {
     const isAllSelected = cartState.selectedIds.length === cartState.products.length;
 

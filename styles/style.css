@@ -1319,10 +1319,6 @@ input[type=number]{
     align-items: initial;
 }
 
-.shipping-info__block--product {
-
-}
-
 .shipping-info__meta {
     margin-left: 16px;
 }
@@ -1337,10 +1333,6 @@ input[type=number]{
     position: absolute;
     top: 2px;
     left: -16px;
-}
-
-.shipping-info__products {
-
 }
 
 .shipping-info__product {
@@ -1483,10 +1475,6 @@ input[type=number]{
 }
 
 /* Cart recepient block */
-
-.cart__recipient {
-
-}
 
 .cart__recipient-title {
     margin-bottom: 35px;

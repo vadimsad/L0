@@ -1,5 +1,5 @@
 import { changePayment, changeShippingAddressCallback, decreaseCount, deleteProduct, handleCountChange, handleCountInput, increaseCount, toggleFavorite, toggleProduct } from './components/cart.js';
-import { deleteShippingItem, hideModal, resetShippingInput, showModal, unfixPageScroll } from './components/modal.js';
+import { deleteShippingItem, hideModal, resetPaymentInput, resetShippingInput, showModal, unfixPageScroll } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { handleTabChange } from './components/tabs.js';
 import { createDiscountTooltip, positionTooltip } from './components/tooltip.js';
@@ -67,6 +67,9 @@ dialogs.forEach(dialog => {
 
 const shippingDialog = document.querySelector('.delivery-dialog.dialog');
 shippingDialog.addEventListener('close', resetShippingInput)
+
+const paymentDialog = document.querySelector('.payment-dialog.dialog');
+paymentDialog.addEventListener('close', resetPaymentInput)
 
 const shippingDeleteButtons = document.querySelectorAll('.delivery__delete');
 shippingDeleteButtons.forEach(button => button.addEventListener('click', deleteShippingItem))
@@ -136,7 +139,7 @@ shippingForm.addEventListener('submit', changeShippingAddressCallback);
 const paymentForm = document.querySelector('.payment-dialog form');
 paymentForm.addEventListener('submit', changePayment);
 
-// Рассчитываем тултип со скидкой
+// Рассчитываем величину скидки для каждого товара
 document.addEventListener('DOMContentLoaded', () => {
     const discountTooltips = document.querySelectorAll('.item__sum-discountless.tooltip-wrapper .tooltip');
     discountTooltips.forEach(createDiscountTooltip)
