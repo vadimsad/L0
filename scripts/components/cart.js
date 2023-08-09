@@ -1,5 +1,6 @@
 import { chooseWordForm } from "../utils/chooseWordForm.js";
 import { formatNumber } from "../utils/formatNumber.js";
+import { handleImmediatePaymentChange } from "./orderForm.js";
 
 const DEFAULT_WORKTIME = 'Ежедневно с 10 до 21';
 const DEFAULT_RATING = 5.00;
@@ -437,11 +438,16 @@ function updateTotalPrice() {
         priceOriginalElement.textContent = formatNumber(totalOriginalPrice);
         priceDiscountElement.textContent = formatNumber(discount);
 
+        
+        document.querySelector('.main__total-submit').textContent = `Оплатить ${formatNumber(totalDiscountedPrice)} сом`;
+
     } else {
         totalPriceElement.textContent = 0;
         totalCountElement.textContent = 0;
         priceOriginalElement.textContent = 0;
         priceDiscountElement.textContent = 0;
+
+        document.querySelector('.main__total-submit').textContent = `Оплатить ${0} сом`;
     }
 }
 

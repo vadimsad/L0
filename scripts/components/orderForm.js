@@ -1,3 +1,4 @@
+import { formatNumber } from "../utils/formatNumber.js";
 import { validateForm, validateInput } from "../utils/validation.js";
 
 export default function handleOrderSubmit(event, formToValidate) {
@@ -29,7 +30,7 @@ export function handleImmediatePaymentChange(checkbox, submitButton, price, elem
     const label = elementToHide.closest('.main__payment-term').querySelector('label');
 
     if (checkbox.checked) {
-        submitButton.textContent = `Оплатить ${price} сом`;
+        submitButton.textContent = `Оплатить ${formatNumber(price)} сом`;
         elementToHide.style.display = 'none';
         label.style.marginBottom = 0;
     } else {
