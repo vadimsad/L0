@@ -23,10 +23,17 @@ const cartState = {
                 PSRNSP: '1067746062449',
                 address: '142181, Московская область, Г.О. ПОДОЛЬСК, Д КОЛЕДИНО, ТЕР. ИНДУСТРИАЛЬНЫЙ ПАРК КОЛЕДИНО, Д. 6, СТР. 1',
             },
+            shippingSchedule: [
+                {
+                    date: '5—6 февраля',
+                    maxQuantity: 2
+                }
+            ],
             stock: 2,
             count: 1,
             isSelected: true,
             isFavorite: false,
+            imageSource: '../../assets/images/product-image-1.png',
         },
         {
             id: 2,
@@ -44,10 +51,25 @@ const cartState = {
                 PSRNSP: '5167746237148',
                 address: '129337, Москва, улица Красная Сосна, 2, корпус 1, стр. 1, помещение 2, офис 34',
             },
+            shippingSchedule: [
+                {
+                    date: '5—6 февраля',
+                    maxQuantity: 184
+                },
+                {
+                    date: '7—8 февраля',
+                    maxQuantity: 200
+                },
+                {
+                    date: '9—10 февраля',
+                    maxQuantity: 616
+                },
+            ],
             stock: 1000,
             count: 200,
             isSelected: true,
             isFavorite: false,
+            imageSource: '../../assets/images/product-image-2.png',
         },
         {
             id: 3,
@@ -63,10 +85,17 @@ const cartState = {
                 PSRNSP: '1067746062449',
                 address: '142181, Московская область, Г.О. ПОДОЛЬСК, Д КОЛЕДИНО, ТЕР. ИНДУСТРИАЛЬНЫЙ ПАРК КОЛЕДИНО, Д. 6, СТР. 1',
             },
+            shippingSchedule: [
+                {
+                    date: '5—6 февраля',
+                    maxQuantity: 2
+                }
+            ],
             stock: 2,
             count: 2,
             isSelected: true,
             isFavorite: false,
+            imageSource: '../../assets/images/product-image-3.png',
         },
     ],
     selectedIds: [1, 2, 3],
@@ -111,7 +140,8 @@ export function toggleProduct(product, selectMode) {
         }
     }
    
-    handleSelectAllInput(selectAllButton)
+    handleSelectAllInput(selectAllButton);
+    updateShippingDate();
     updateTotalPrice();
 }
 
@@ -165,6 +195,7 @@ export function deleteProduct(event) {
     productElement.remove();
     deselectProduct(productID);
     updateTotalPrice();
+    updateShippingDate();
     updateCartLabels();
 }
 
@@ -261,6 +292,103 @@ export function decreaseCount(event) {
     changeCount(event, false);
 }
 
+function updateShippingDate() {
+    const productsToShip = cartState.products.map(({isSelected, id, count, shippingSchedule}) => {
+        if (isSelected) {
+            return {id, count, shippingSchedule}
+        }
+    }).filter(product => product !== undefined);
+    
+    const dates = new Map();
+    productsToShip.forEach((product) => calculateShippingDates(product, dates));
+
+    document.querySelectorAll('.shipping-info__block.shipping-info__block--products').forEach(node => node.remove());
+    const shippingBlockParent = document.querySelector('.cart__shipping-info.shipping-info dl');
+
+    dates.forEach((products, date) => {
+        const productsBlock = products.map(product => {
+            return (
+                `
+                <div class="shipping-info__product" data-id="${product.id}">
+                    <a href="#">
+                        <img src="./assets/images/product-image-${product.id}.png" alt="Изображение">
+                        ${product.count > 1 ? `<div class="shipping-info__product-label item-label">${product.count}</div>` : ''}
+                    </a>
+                </div>
+                `
+            )
+        }).join('');
+        const shippingBlock = 
+        `
+        <div class="shipping-info__block shipping-info__block--products">
+            <dt class="text-16 weight-600">
+                ${date}
+            </dt>
+            <dd>
+                <div class="shipping-info__products">
+                    ${productsBlock}
+                </div>
+            </dd>
+        </div>
+        `;
+
+        shippingBlockParent.insertAdjacentHTML('beforeend', shippingBlock);
+    })
+
+    updateShipmentDateInForm(dates);
+}
+
+function updateShipmentDateInForm(dates) {
+    const datesString = Array.from(dates);
+
+    if (datesString.length === 0) {
+        document.querySelector('.main__shipping-date').textContent = '';
+        return;
+    }
+
+    const minDate = Math.min(...datesString[0][0].match(/\d/g));
+    const maxDate = Math.max(...datesString[datesString.length - 1][0].match(/\d/g));
+    const month = datesString[0][0].match(/[a-zA-Zа-яА-Я]/g).slice(0,3).join('');
+    
+    document.querySelector('.main__shipping-date').textContent = `${minDate}-${maxDate} ${month}`;
+}
+
+function calculateShippingDates({id, count, shippingSchedule}, dates) {
+    let productsToShip = count;
+
+    for (let i = 0; i < shippingSchedule.length; i++) {
+        const shipping = shippingSchedule[i];
+
+        if (productsToShip <= shipping.maxQuantity) {
+            const shippingInfo = {
+                id,
+                count: productsToShip,
+            };
+
+            if (dates.has(shipping.date)) {
+                dates.set(shipping.date, [...dates.get(shipping.date), shippingInfo])
+            } else {
+                dates.set(shipping.date, [shippingInfo])
+            }
+
+            break;
+        } else {
+            const shippingInfo = {
+                id,
+                count: shipping.maxQuantity,
+            };
+
+            if (dates.has(shipping.date)) {
+                dates.set(shipping.date, [...dates.get(shipping.date), shippingInfo])
+            } else {
+                dates.set(shipping.date, [shippingInfo])
+            }
+
+            productsToShip = count - shipping.maxQuantity;
+        }
+    }
+}
+
 function updateCartLabels() {
     const cartLabel = document.querySelector('.header__link_cart-label.item-label');
     const cartLabelMobile = document.querySelector('.footer__menu-link-label.item-label');
@@ -286,7 +414,7 @@ function updateTotalPrice() {
             return acc += original * count;
         }, 0);
         const totalCount = selectedProducts.reduce((acc, {count}) => {
-            return acc += count;
+            return acc += +count;
         }, 0)
         const discount = totalDiscountedPrice - totalOriginalPrice;
 
@@ -311,7 +439,7 @@ export function getFinalPrice() {
 
 export function getTotalCount() {
     return cartState.products.filter(product => product.isSelected).reduce((acc, {count}) => {
-        return acc += count;
+        return acc += +count;
     }, 0)
 }
 
@@ -320,6 +448,7 @@ function changeProductCount(productID, newCount) {
     product.count = newCount;
 
     updatePrice(product);
+    updateShippingDate();
     updateTotalPrice()
 }
 
