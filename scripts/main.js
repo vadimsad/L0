@@ -141,6 +141,6 @@ paymentForm.addEventListener('submit', changePayment);
 
 // Рассчитываем величину скидки для каждого товара
 document.addEventListener('DOMContentLoaded', () => {
-    const discountTooltips = document.querySelectorAll('.item__sum-discountless.tooltip-wrapper .tooltip');
+    const discountTooltips = document.querySelectorAll('.item__sum-discountless .tooltip');
     discountTooltips.forEach(createDiscountTooltip)
 })
