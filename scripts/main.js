@@ -1,5 +1,5 @@
 import { changePayment, changeShippingAddress, decreaseCount, deleteProduct, handleCountChange, handleCountInput, increaseCount, toggleFavorite, toggleProduct } from './components/cart.js';
-import { hideModal, showModal, unfixPageScroll } from './components/modal.js';
+import { deleteShippingItem, hideModal, showModal, unfixPageScroll } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { handleTabChange } from './components/tabs.js';
 import { positionTooltip } from './components/tooltip.js';
@@ -64,6 +64,9 @@ dialogs.forEach(dialog => {
     dialog.addEventListener('click', hideModal);
     dialog.addEventListener('close', unfixPageScroll);
 });
+
+const shippingDeleteButtons = document.querySelectorAll('.delivery__delete');
+shippingDeleteButtons.forEach(button => button.addEventListener('click', deleteShippingItem))
 
 // Переключение вкладок
 const tabs = document.querySelectorAll('input[name="tab"]');

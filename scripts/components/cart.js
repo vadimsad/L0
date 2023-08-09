@@ -243,7 +243,7 @@ function updatePaymentInfo() {
 
 export function changeShippingAddress(event) {
     event.preventDefault();
-
+    
     const dialog = event.target.closest('dialog');
     const newType = event.target.querySelector('input:checked').dataset.type;
     const newAddress = event.target.querySelector('input:checked ~ p.text-16').textContent;

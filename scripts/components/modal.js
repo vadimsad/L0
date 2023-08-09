@@ -28,6 +28,19 @@ export function unfixPageScroll() {
     html.style.top = "";
 }
 
+export function deleteShippingItem(event) {
+    const item = event.target.closest('.delivery-dialog__address');
+    const siblingItem = item.nextElementSibling || item.previousElementSibling;
+
+    if (siblingItem && siblingItem.classList.contains('delivery-dialog__address')) {
+        item.remove();
+        
+        if (item.querySelector('input').checked) {
+            siblingItem.querySelector('input').checked = true;
+        }
+    }
+}
+
 function fixPageScroll() {
     scrollPosition = window.pageYOffset;
     html.style.top = -scrollPosition + "px";
