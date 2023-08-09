@@ -1,3 +1,5 @@
+import { cartState, changeShippingAddress } from "./cart.js";
+
 let html = document.documentElement;
 let scrollPosition = window.pageYOffset;
 
@@ -30,13 +32,31 @@ export function unfixPageScroll() {
 
 export function deleteShippingItem(event) {
     const item = event.target.closest('.delivery-dialog__address');
+    const input = item.querySelector('.input-radio');
+    const isCurrentItem = input.checked;
     const siblingItem = item.nextElementSibling || item.previousElementSibling;
 
-    if (siblingItem && siblingItem.classList.contains('delivery-dialog__address')) {
+    if (siblingItem && !isCurrentItem) {
         item.remove();
         
-        if (item.querySelector('input').checked) {
-            siblingItem.querySelector('input').checked = true;
+        // if (item.querySelector('input').checked) {
+        //     siblingItem.querySelector('input').checked = true;
+        // }
+    }
+}
+
+export function resetShippingInput(event) {
+    const dialog = event.target;
+    const checkedInput = dialog.querySelector('input.input-radio:checked');
+    const isWrongInputChecked = checkedInput.id !== cartState.shipping.id;
+    const correctInput = dialog.querySelector(`input#${cartState.shipping.id}`);
+
+    if (isWrongInputChecked) {
+        if (correctInput) {
+            checkedInput.checked = false;
+            dialog.querySelector(`input#${cartState.shipping.id}`).checked = true;
+        } else {
+            changeShippingAddress(checkedInput);
         }
     }
 }

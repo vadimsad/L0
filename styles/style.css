@@ -945,7 +945,7 @@ input[type=number]{
 .item__sum-discountless .tooltip {
     width: 240px;
     top: 140%;
-    right: 10px;
+    right: -10px;
 }
 
 .item__sum-discountless .tooltip-top {
@@ -1020,13 +1020,16 @@ input[type=number]{
     margin-bottom: 32px;
     display: grid;
     grid-template-rows: 1fr;
-    overflow: hidden;
     transition: 0.5s;
 }
 
 .cart__items.hidden {
     grid-template-rows: 0fr;
     margin-bottom: 0;
+}
+
+.cart__items.overflow-hidden {
+    overflow: hidden;
 }
 
 .cart__items .cart__items-wrapper {

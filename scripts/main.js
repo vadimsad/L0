@@ -1,8 +1,8 @@
-import { changePayment, changeShippingAddress, decreaseCount, deleteProduct, handleCountChange, handleCountInput, increaseCount, toggleFavorite, toggleProduct } from './components/cart.js';
-import { deleteShippingItem, hideModal, showModal, unfixPageScroll } from './components/modal.js';
+import { changePayment, changeShippingAddressCallback, decreaseCount, deleteProduct, handleCountChange, handleCountInput, increaseCount, toggleFavorite, toggleProduct } from './components/cart.js';
+import { deleteShippingItem, hideModal, resetShippingInput, showModal, unfixPageScroll } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { handleTabChange } from './components/tabs.js';
-import { positionTooltip } from './components/tooltip.js';
+import { createDiscountTooltip, positionTooltip } from './components/tooltip.js';
 import { hideProducts } from './utils/hideProducts.js';
 import { throttle } from './utils/throttle.js';
 import { handleTelInputChange, validateInput } from './utils/validation.js';
@@ -64,6 +64,9 @@ dialogs.forEach(dialog => {
     dialog.addEventListener('click', hideModal);
     dialog.addEventListener('close', unfixPageScroll);
 });
+
+const shippingDialog = document.querySelector('.delivery-dialog.dialog');
+shippingDialog.addEventListener('close', resetShippingInput)
 
 const shippingDeleteButtons = document.querySelectorAll('.delivery__delete');
 shippingDeleteButtons.forEach(button => button.addEventListener('click', deleteShippingItem))
@@ -127,8 +130,14 @@ deleteButtons.forEach(button => button.addEventListener('click', deleteProduct))
 
 // Изменение адреса доставки
 const shippingForm = document.querySelector('.delivery-dialog__form');
-shippingForm.addEventListener('submit', changeShippingAddress);
+shippingForm.addEventListener('submit', changeShippingAddressCallback);
 
 // Изменение способа оплаты
 const paymentForm = document.querySelector('.payment-dialog form');
 paymentForm.addEventListener('submit', changePayment);
+
+// Рассчитываем тултип со скидкой
+document.addEventListener('DOMContentLoaded', () => {
+    const discountTooltips = document.querySelectorAll('.item__sum-discountless.tooltip-wrapper .tooltip');
+    discountTooltips.forEach(createDiscountTooltip)
+})

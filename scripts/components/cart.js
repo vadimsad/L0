@@ -6,15 +6,25 @@ const DEFAULT_WORKTIME = 'Ежедневно с 10 до 21';
 const DEFAULT_RATING = 5.00;
 const DEFAULT_CARD_EXPIRY = '01/42';
 
-const cartState = {
+export const cartState = {
     products: [
         {
             id: 1,
             title: 'Футболка UZcotton мужская',
             price: {
-                discounted: 522,
+                discounted: 368,
                 original: 1051
             },
+            discounts: [
+                {
+                    name: 'Скидка 55%',
+                    value: 0.55
+                },
+                {
+                    name: 'Скидка покупателя 10%',
+                    value: 0.1
+                },
+            ],
             properties: {
                 'Цвет': 'белый',
                 'Размер': '56',
@@ -41,9 +51,19 @@ const cartState = {
             id: 2,
             title: 'Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс бампер на Apple iPhone XR, MobiSafe',
             price: {
-                discounted: 10500,
+                discounted: 4025,
                 original: 11500,
             },
+            discounts: [
+                {
+                    name: 'Скидка 55%',
+                    value: 0.55
+                },
+                {
+                    name: 'Скидка покупателя 10%',
+                    value: 0.1
+                },
+            ],
             properties: {
                 'Цвет': 'прозрачный',
             },
@@ -77,9 +97,19 @@ const cartState = {
             id: 3,
             title: 'Карандаши цветные Faber-Castell "Замок", набор 24 цвета, заточенные, шестигранные, Faber-Castell ',
             price: {
-                discounted: 247,
+                discounted: 167,
                 original: 475
             },
+            discounts: [
+                {
+                    name: 'Скидка 55%',
+                    value: 0.55
+                },
+                {
+                    name: 'Скидка покупателя 10%',
+                    value: 0.1
+                },
+            ],
             properties: {},
             location: 'Коледино WB',
             supplier: {
@@ -102,6 +132,7 @@ const cartState = {
     ],
     selectedIds: [1, 2, 3],
     shipping: {
+        id: 'pickup-1',
         type: 'pickup',
         address: 'Бишкек, улица Ахматбека Суюмбаева, 12/1',
         rating: 4.99,
@@ -241,18 +272,30 @@ function updatePaymentInfo() {
     paymentCardExpiry.textContent = cartState.payment.cardExpiry;
 }
 
-export function changeShippingAddress(event) {
+export function changeShippingAddressCallback(event) {
     event.preventDefault();
-    
+
     const dialog = event.target.closest('dialog');
+    const newID = event.target.querySelector('input:checked').id;
     const newType = event.target.querySelector('input:checked').dataset.type;
     const newAddress = event.target.querySelector('input:checked ~ p.text-16').textContent;
     const newRating = event.target.querySelector('input:checked ~ .delivery-dialog__address-description .rating')?.textContent || DEFAULT_RATING;
     const newWorkTime = DEFAULT_WORKTIME;
     
-    cartState.shipping = {type: newType, address: newAddress, rating: newRating, workTime: newWorkTime};
+    cartState.shipping = {id: newID, type: newType, address: newAddress, rating: newRating, workTime: newWorkTime};
     updateShippingInfo();
     dialog.close();
+}
+
+export function changeShippingAddress(checkedInput) {
+    const newID = checkedInput.id;
+    const newType = checkedInput.dataset.type;
+    const newAddress = checkedInput.closest('label').querySelector('p.text-16').textContent;
+    const newRating = checkedInput.closest('label').querySelector('.delivery-dialog__address-description .rating')?.textContent || DEFAULT_RATING;
+    const newWorkTime = DEFAULT_WORKTIME;
+
+    cartState.shipping = {id: newID, type: newType, address: newAddress, rating: newRating, workTime: newWorkTime};
+    updateShippingInfo();
 }
 
 function updateShippingInfo() {
@@ -421,7 +464,7 @@ function updateTotalPrice() {
     const selectedProducts = cartState.products.filter(product => product.isSelected);
 
     if (selectedProducts.length > 0) {
-        const totalDiscountedPrice = selectedProducts.reduce((acc, {price: {discounted}, count}) => {
+        const totalDiscountedPrice = selectedProducts.reduce((acc, {price: {discounted}, count, discounts}) => {
             return acc += discounted * count;
         }, 0);
         const totalOriginalPrice = selectedProducts.reduce((acc, {price: {original}, count}) => {
