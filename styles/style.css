@@ -1967,4 +1967,12 @@ label.invalid input.shake ~ span{
         width: auto;
         height: auto;
     }
+
+    .delivery-dialog__form .button-primary {
+        width: 100%;
+    }
+
+    .payment-dialog .button-primary {
+        width: 100%;
+    }
 }
