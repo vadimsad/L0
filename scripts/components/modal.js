@@ -76,6 +76,15 @@ export function resetPaymentInput(event) {
     }
 }
 
+// Функция для переключения вкладок в модальном окне
+export function handleTabChange(event) {
+    const labels = event.target.closest('.delivery-dialog__tabs').querySelectorAll('label');
+    const tabsContent = document.querySelectorAll('.delivery-dialog-addresses');
+    
+    tabsContent.forEach(content => content.classList.toggle('hidden'));
+    labels.forEach(label => label.classList.toggle('active'))
+}
+
 // Фиксация прокрутки страницы при открытии модального окна
 function fixPageScroll() {
     scrollPosition = window.pageYOffset;

@@ -5,9 +5,10 @@ export function positionTooltip(tooltipTrigger) {
     const tooltip = tooltipTrigger.closest('.tooltip-wrapper').querySelector('.tooltip');
     const tooltipHeight = tooltip.getBoundingClientRect().height;
     const tooltipTriggerRect = tooltipTrigger.getBoundingClientRect();
+    const mobileMenuHeight = document.querySelector('.footer__menu-mobile').getBoundingClientRect().height;
 
     // Вычисление расстояния до нижней границы окна
-    const distanceToBottom = window.innerHeight - (tooltipTriggerRect.top + tooltipTriggerRect.height);
+    const distanceToBottom = (window.innerHeight - mobileMenuHeight) - (tooltipTriggerRect.top + tooltipTriggerRect.height);
 
     // Применение класса для отображения подсказки сверху, если она не помещается снизу
     tooltip.classList.toggle("tooltip-top", distanceToBottom < tooltipHeight);

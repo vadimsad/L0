@@ -1,7 +1,6 @@
 import { changePayment, changeShippingAddressCallback, decreaseCount, deleteProduct, handleCountChange, handleCountInput, increaseCount, toggleFavorite, toggleProduct } from './components/cart.js';
-import { deleteShippingItem, hideModal, resetPaymentInput, resetShippingInput, showModal, unfixPageScroll } from './components/modal.js';
+import { deleteShippingItem, hideModal, resetPaymentInput, resetShippingInput, showModal, unfixPageScroll, handleTabChange } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
-import { handleTabChange } from './components/tabs.js';
 import { createDiscountTooltip, positionTooltip } from './components/tooltip.js';
 import { hideProducts } from './utils/hideProducts.js';
 import { throttle } from './utils/throttle.js';
@@ -74,7 +73,7 @@ paymentDialog.addEventListener('close', resetPaymentInput)
 const shippingDeleteButtons = document.querySelectorAll('.delivery__delete');
 shippingDeleteButtons.forEach(button => button.addEventListener('click', deleteShippingItem))
 
-// Переключение вкладок
+// Переключение вкладок в модальном окне доставки
 const tabs = document.querySelectorAll('input[name="tab"]');
 tabs.forEach(tab => tab.onchange = handleTabChange);
 

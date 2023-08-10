@@ -21,8 +21,7 @@
                     </picture>
                 </button>
                 <div class="header__logo">
-                    <a href="#" class="header__logo">ТОВАРЫ
-                        И ТОЧКА
+                    <a href="#" class="header__logo">ТОВАРЫ&#10;&#13;И ТОЧКА
                     </a>
                 </div>
                 <form action="#" class="header__search-form">
@@ -80,7 +79,7 @@
                             <span class="checkmark"></span>
                             Выбрать все
                         </label>
-                        <div class="cart__controls-items-count">
+                        <div class="cart__controls-items-count hidden">
                             <p class="text-16 weight-600">
                                 <span class="items-count">266 товаров · </span>
                                 <span class="items-price">2 100 569 сом</span>
@@ -100,7 +99,8 @@
                                     </label>
                                     <div class="item__image">
                                         <a href="#">
-                                            <img src="./assets/images/product-image-1.png" alt="Изображение товара">
+                                            <img src="./assets/images/product-image-1.png" loading="lazy"
+                                                alt="Изображение товара">
                                             <div class="item__prop-mobile text-14">56</div>
                                         </a>
                                     </div>
@@ -195,7 +195,7 @@
 
                                             </button>
                                             <button type="button" class="control-buttons__delete" title="Удалить">
-                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                                <img src="./assets/icons/trash.svg" alt="Удалить">
                                             </button>
                                         </div>
                                     </div>
@@ -235,7 +235,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="item__image">
-                                        <a href="#"><img src="./assets/images/product-image-2.png"
+                                        <a href="#"><img src="./assets/images/product-image-2.png" loading="lazy"
                                                 alt="Изображение товара"></a>
                                     </div>
                                     <div class="item__info">
@@ -320,7 +320,7 @@
 
                                             </button>
                                             <button type="button" class="control-buttons__delete" title="Удалить">
-                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                                <img src="./assets/icons/trash.svg" alt="Удалить">
                                             </button>
                                         </div>
                                     </div>
@@ -360,7 +360,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                     <div class="item__image">
-                                        <a href="#"><img src="./assets/images/product-image-3.png"
+                                        <a href="#"><img src="./assets/images/product-image-3.png" loading="lazy"
                                                 alt="Изображение товара"></a>
                                     </div>
                                     <div class="item__info">
@@ -444,7 +444,7 @@
 
                                             </button>
                                             <button type="button" class="control-buttons__delete" title="Удалить">
-                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                                <img src="./assets/icons/trash.svg" alt="Удалить">
                                             </button>
                                         </div>
                                     </div>
@@ -492,7 +492,7 @@
                             <div class="cart__item item item--missing">
                                 <div class="item__details">
                                     <div class="item__image">
-                                        <a href="#"><img src="./assets/images/product-image-1.png"
+                                        <a href="#"><img src="./assets/images/product-image-1.png" loading="lazy"
                                                 alt="Изображение товара">
                                             <div class="item__prop-mobile text-14">56</div>
                                         </a>
@@ -526,7 +526,7 @@
 
                                             </button>
                                             <button type="button" class="control-buttons__delete" title="Удалить">
-                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                                <img src="./assets/icons/trash.svg" alt="Удалить">
                                             </button>
                                         </div>
                                     </div>
@@ -535,7 +535,7 @@
                             <div class="cart__item item item--missing">
                                 <div class="item__details">
                                     <div class="item__image">
-                                        <a href="#"><img src="./assets/images/product-image-2.png"
+                                        <a href="#"><img src="./assets/images/product-image-2.png" loading="lazy"
                                                 alt="Изображение товара"></a>
                                     </div>
                                     <div class="item__info">
@@ -565,7 +565,7 @@
 
                                             </button>
                                             <button type="button" class="control-buttons__delete" title="Удалить">
-                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                                <img src="./assets/icons/trash.svg" alt="Удалить">
                                             </button>
                                         </div>
                                     </div>
@@ -574,7 +574,7 @@
                             <div class="cart__item item item--missing">
                                 <div class="item__details">
                                     <div class="item__image">
-                                        <a href="#"><img src="./assets/images/product-image-3.png"
+                                        <a href="#"><img src="./assets/images/product-image-3.png" loading="lazy"
                                                 alt="Изображение товара">
                                             <div class="item__prop-mobile text-14">56/54/52/50/48</div>
                                         </a>
@@ -600,7 +600,7 @@
 
                                             </button>
                                             <button type="button" class="control-buttons__delete" title="Удалить">
-                                                <img src="/assets/icons/trash.svg" alt="Удалить">
+                                                <img src="./assets/icons/trash.svg" alt="Удалить">
                                             </button>
                                         </div>
                                     </div>
@@ -646,17 +646,19 @@
                                         <div class="shipping-info__products">
                                             <div class="shipping-info__product" data-id="1">
                                                 <a href="#"><img src="./assets/images/product-image-1.png"
-                                                        alt="Изображение"></a>
+                                                        loading="lazy" alt="Изображение"></a>
                                             </div>
                                             <div class="shipping-info__product" data-id="2">
                                                 <a href="#">
-                                                    <img src="./assets/images/product-image-2.png" alt="Изображение">
+                                                    <img src="./assets/images/product-image-2.png" loading="lazy"
+                                                        alt="Изображение">
                                                     <div class="shipping-info__product-label item-label">184</div>
                                                 </a>
                                             </div>
                                             <div class="shipping-info__product" data-id="3">
                                                 <a href="#">
-                                                    <img src="./assets/images/product-image-3.png" alt="Изображение">
+                                                    <img src="./assets/images/product-image-3.png" loading="lazy"
+                                                        alt="Изображение">
                                                     <div class="shipping-info__product-label item-label">2</div>
                                                 </a>
                                             </div>
@@ -671,7 +673,8 @@
                                         <div class="shipping-info__products" data-id="2">
                                             <div class="shipping-info__product">
                                                 <a href="#">
-                                                    <img src="./assets/images/product-image-2.png" alt="Изображение">
+                                                    <img src="./assets/images/product-image-2.png" loading="lazy"
+                                                        alt="Изображение">
                                                     <div class="shipping-info__product-label item-label">16</div>
                                                 </a>
                                             </div>
@@ -997,7 +1000,7 @@
                         src="./assets/icons/cross.svg" alt="Закрыть"></button>
             </div>
             <div class="delivery-dialog__tabs">
-                <label class="delivery-dialog__tab text-13 weight-700">
+                <label class="delivery-dialog__tab text-13 weight-700 active">
                     <input type="radio" name="tab" id="pickup" checked>
                     В пункт выдачи
                 </label>
@@ -1021,7 +1024,7 @@
                                 Пункт выдачи</span>
                         </label>
                         <button type="button" class="delivery__delete" title="Удалить">
-                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                            <img src="./assets/icons/trash.svg" alt="Удалить">
                         </button>
                     </div>
                     <div class="delivery-dialog__address">
@@ -1033,7 +1036,7 @@
                                 Пункт выдачи</span>
                         </label>
                         <button type="button" class="delivery__delete" title="Удалить">
-                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                            <img src="./assets/icons/trash.svg" alt="Удалить">
                         </button>
                     </div>
                     <div class="delivery-dialog__address">
@@ -1045,7 +1048,7 @@
                                 Пункт выдачи</span>
                         </label>
                         <button type="button" class="delivery__delete" title="Удалить">
-                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                            <img src="./assets/icons/trash.svg" alt="Удалить">
                         </button>
                     </div>
                 </div>
@@ -1060,7 +1063,7 @@
                             <p class="text-16">Бишкек, улица Табышалиева, 57</p>
                         </label>
                         <button type="button" class="delivery__delete" title="Удалить">
-                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                            <img src="./assets/icons/trash.svg" alt="Удалить">
                         </button>
                     </div>
                     <div class="delivery-dialog__address">
@@ -1070,7 +1073,7 @@
                             <p class="text-16">Бишкек, улица Жукеева-Пудовкина, 77/1</p>
                         </label>
                         <button type="button" class="delivery__delete" title="Удалить">
-                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                            <img src="./assets/icons/trash.svg" alt="Удалить">
                         </button>
                     </div>
                     <div class="delivery-dialog__address">
@@ -1080,7 +1083,7 @@
                             <p class="text-16">Бишкек, микрорайон Джал, улица Ахунбаева Исы, 67/1</p>
                         </label>
                         <button type="button" class="delivery__delete" title="Удалить">
-                            <img src="/assets/icons/trash.svg" alt="Удалить">
+                            <img src="./assets/icons/trash.svg" alt="Удалить">
                         </button>
                     </div>
                 </div>

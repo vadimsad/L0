@@ -526,7 +526,7 @@ input[type=number]{
     background-color: rgba(255, 255, 255, 0.50);
 }
 
-.header__search-form:has(input:focus) {
+.header__search-form:focus-within {
     outline: 2px solid var(--system-white);
 }
 
@@ -1004,15 +1004,8 @@ input[type=number]{
     transition: transform 0.2s ease-in-out;
 }
 
-.cart__controls .cart__controls-items-count {
-    display: none;
-}
-
-.cart__controls:has(.cart__controls-show.hidden) .cart__controls-items-count {
-    display: block;
-}
-
-.cart__controls:has(.cart__controls-show.hidden) .checkbox-label {
+.cart__controls label.hidden,
+.cart__controls-items-count.hidden {
     display: none;
 }
 
@@ -1878,7 +1871,7 @@ label.invalid input.shake ~ span{
     cursor: pointer;
 }
 
-.delivery-dialog__tab:has(input:checked) {
+.delivery-dialog__tab.active {
     border: 2px solid #CB11AB;
 }
 
