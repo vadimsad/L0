@@ -36,7 +36,7 @@ export function toggleProduct(product, selectMode) {
             deselectProduct(productID);
         }
     }
-   
+
     handleSelectAllInput(selectAllButton);
     updateShippingDate();
     updateTotalPrice();
@@ -47,7 +47,7 @@ export function handleCountInput(event) {
     const input = event.target;
     const maxValueLength = parseInt(input.getAttribute('maxlength')) || 3;
     const inputValue = input.value;
-  
+
     const sanitizedValue = inputValue.replace(/\D/g, '');
     const trimmedValue = sanitizedValue.slice(0, maxValueLength);
 
@@ -103,7 +103,7 @@ export function deleteProduct(event) {
         const missingTextElement = document.querySelector('#missing-text');
         const currentNumber = missingNumberElement.textContent;
         const newNumber = currentNumber - 1;
-        
+
         missingTitleElement.textContent = chooseWordForm(newNumber, ['Отсутствует', 'Отсутствуют', 'Отсутствуют']);
         missingNumberElement.textContent = newNumber;
         missingTextElement.textContent = chooseWordForm(newNumber, ['товар', 'товара', 'товаров']);
@@ -155,8 +155,8 @@ export function changeShippingAddressCallback(event) {
     const newAddress = event.target.querySelector('input:checked ~ p.text-16').textContent;
     const newRating = event.target.querySelector('input:checked ~ .delivery-dialog__address-description .rating')?.textContent || DEFAULT_RATING;
     const newWorkTime = DEFAULT_WORKTIME;
-    
-    cartState.shipping = {id: newID, type: newType, address: newAddress, rating: newRating, workTime: newWorkTime};
+
+    cartState.shipping = { id: newID, type: newType, address: newAddress, rating: newRating, workTime: newWorkTime };
     updateShippingInfo();
     dialog.close();
 }
@@ -169,7 +169,7 @@ export function changeShippingAddress(checkedInput) {
     const newRating = checkedInput.closest('label').querySelector('.delivery-dialog__address-description .rating')?.textContent || DEFAULT_RATING;
     const newWorkTime = DEFAULT_WORKTIME;
 
-    cartState.shipping = {id: newID, type: newType, address: newAddress, rating: newRating, workTime: newWorkTime};
+    cartState.shipping = { id: newID, type: newType, address: newAddress, rating: newRating, workTime: newWorkTime };
     updateShippingInfo();
 }
 
@@ -181,16 +181,19 @@ function updateShippingInfo() {
     const shippingInfoAddress = shippingInfo.querySelector('dd p');
     const shippingInfoRating = shippingInfo.querySelector('.shipping-info__rating');
     const shippingInfoWorkTime = shippingInfo.querySelector('.shipping-info__worktime');
+    const shippingInfoTypeInSummary = document.querySelector('.main__shipping-delivery .main__shipping-title .heading-4');
 
     addressElement.textContent = cartState.shipping.address;
-    
+
     switch (cartState.shipping.type) {
         case 'pickup': {
             shippingInfoType.textContent = 'Пункт выдачи';
+            shippingInfoTypeInSummary.textContent = 'Доставка в пункт выдачи';
             break;
         }
         case 'courier': {
             shippingInfoType.textContent = 'Доставит курьер';
+            shippingInfoTypeInSummary.textContent = 'Доставит курьер';
             break;
         }
     }
@@ -208,7 +211,7 @@ function changeCount(event, increment) {
     const minValue = parseInt(input.getAttribute('min')) || 1;
     const maxValue = cartState.products.find(product => product.id == id)?.stock || Infinity;
     const maxValueLength = parseInt(input.getAttribute('maxlength')) || 3;
-    
+
     const newValue = increment ? currentValue + 1 : currentValue - 1;
     if (newValue >= minValue && newValue.toString().length <= maxValueLength && newValue <= maxValue) {
         input.value = newValue;
@@ -229,12 +232,12 @@ export function decreaseCount(event) {
 
 // Обновление даты доставки
 function updateShippingDate() {
-    const productsToShip = cartState.products.map(({isSelected, id, count, shippingSchedule}) => {
+    const productsToShip = cartState.products.map(({ isSelected, id, count, shippingSchedule }) => {
         if (isSelected) {
-            return {id, count, shippingSchedule}
+            return { id, count, shippingSchedule }
         }
     }).filter(product => product !== undefined);
-    
+
     const dates = new Map();
     productsToShip.forEach((product) => calculateShippingDates(product, dates));
 
@@ -254,8 +257,8 @@ function updateShippingDate() {
                 `
             )
         }).join('');
-        const shippingBlock = 
-        `
+        const shippingBlock =
+            `
         <div class="shipping-info__block shipping-info__block--products">
             <dt class="text-16 weight-600">
                 ${date}
@@ -283,15 +286,15 @@ function updateShipmentDateInForm(dates) {
         return;
     }
 
-    const minDate = Math.min(...datesString[0][0].match(/\d/g));
-    const maxDate = Math.max(...datesString[datesString.length - 1][0].match(/\d/g));
-    const month = datesString[0][0].match(/[a-zA-Zа-яА-Я]/g).slice(0,3).join('');
-    
-    document.querySelector('.main__shipping-date').textContent = `${minDate}-${maxDate} ${month}`;
+    const minDate = Math.min(...datesString[0][0].match(/\d+/g));
+    const maxDate = Math.max(...datesString[datesString.length - 1][0].match(/\d+/g));
+    const month = datesString[0][0].match(/[a-zA-Zа-яА-Я]/g).slice(0, 3).join('');
+
+    document.querySelector('.main__shipping-date').textContent = `${minDate}−${maxDate} ${month}`;
 }
 
 // Расчет дат доставки для товара
-function calculateShippingDates({id, count, shippingSchedule}, dates) {
+function calculateShippingDates({ id, count, shippingSchedule }, dates) {
     let productsToShip = count;
 
     for (let i = 0; i < shippingSchedule.length; i++) {
@@ -335,6 +338,14 @@ function updateCartLabels() {
 
     cartLabel.textContent = productsRemains;
     cartLabelMobile.textContent = productsRemains;
+
+    if (productsRemains === 0) {
+        cartLabel.style.display = 'none';
+        cartLabelMobile.style.display = 'none';
+    } else {
+        cartLabel.style.display = '';
+        cartLabelMobile.style.display = '';
+    }
 }
 
 // Обновление общей стоимости
@@ -344,17 +355,18 @@ function updateTotalPrice() {
     const totalCountTextElement = document.querySelector('.main__total-price #goods-text');
     const priceOriginalElement = document.querySelector('.main__total-prices-value #price-discountless');
     const priceDiscountElement = document.querySelector('.main__total-prices-value #price-discount');
+    const immediatePaymentCheckbox = document.querySelector('#make-order-form #immediate-payment');
 
     const selectedProducts = cartState.products.filter(product => product.isSelected);
 
-    if (selectedProducts.length > 0) {
-        const totalDiscountedPrice = selectedProducts.reduce((acc, {price: {discounted}, count, discounts}) => {
+    if (selectedProducts.length >= 0) {
+        const totalDiscountedPrice = selectedProducts.reduce((acc, { price: { discounted }, count, discounts }) => {
             return acc += discounted * count;
         }, 0);
-        const totalOriginalPrice = selectedProducts.reduce((acc, {price: {original}, count}) => {
+        const totalOriginalPrice = selectedProducts.reduce((acc, { price: { original }, count }) => {
             return acc += original * count;
         }, 0);
-        const totalCount = selectedProducts.reduce((acc, {count}) => {
+        const totalCount = selectedProducts.reduce((acc, { count }) => {
             return acc += +count;
         }, 0)
         const discount = totalDiscountedPrice - totalOriginalPrice;
@@ -363,10 +375,11 @@ function updateTotalPrice() {
         totalCountElement.textContent = formatNumber(totalCount);
         totalCountTextElement.textContent = chooseWordForm(totalCount, ['товар', 'товара', 'товаров'])
         priceOriginalElement.textContent = formatNumber(totalOriginalPrice);
-        priceDiscountElement.textContent = formatNumber(discount);
+        priceDiscountElement.textContent = formatNumber(discount.toString().replace('-', '−'));
 
-        
-        document.querySelector('.main__total-submit').textContent = `Оплатить ${formatNumber(totalDiscountedPrice)} сом`;
+        if (immediatePaymentCheckbox.checked) {
+            document.querySelector('.main__total-submit').textContent = `Оплатить ${formatNumber(totalDiscountedPrice)} сом`;
+        }
 
     } else {
         totalPriceElement.textContent = 0;
@@ -380,14 +393,14 @@ function updateTotalPrice() {
 
 // Получение общей цены для оплаты
 export function getFinalPrice() {
-    return cartState.products.filter(product => product.isSelected).reduce((acc, {price: {discounted}, count}) => {
+    return cartState.products.filter(product => product.isSelected).reduce((acc, { price: { discounted }, count }) => {
         return acc += discounted * count;
     }, 0);
 }
 
 // Получение общего количества выбранных товаров
 export function getTotalCount() {
-    return cartState.products.filter(product => product.isSelected).reduce((acc, {count}) => {
+    return cartState.products.filter(product => product.isSelected).reduce((acc, { count }) => {
         return acc += +count;
     }, 0)
 }

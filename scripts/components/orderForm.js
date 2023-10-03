@@ -6,11 +6,11 @@ export default function handleOrderSubmit(event, formToValidate) {
         return;
     };
 
-    const {isValid, invalidInputs} = validateForm(formToValidate);
+    const { isValid, invalidInputs } = validateForm(formToValidate);
 
-    if(!isValid) {
+    if (!isValid) {
         event.preventDefault();
-        
+
         invalidInputs.forEach(input => {
             if (!input.classList.contains('shake')) {
                 input.classList.add('shake');
@@ -23,14 +23,14 @@ export default function handleOrderSubmit(event, formToValidate) {
 
     // Если нужно, чтобы после отправки формы пустые поля валидировались в момент ввода, а не после события blur:
     const inputs = formToValidate.querySelectorAll('input');
-    inputs.forEach(input =>input.oninput = () => validateInput(input));
+    inputs.forEach(input => input.oninput = () => validateInput(input));
 }
 
-export function handleImmediatePaymentChange(checkbox, submitButton, price, elementToHide) {
+export function handleImmediatePaymentChange(checkbox, submitButton, priceBlock, elementToHide) {
     const label = elementToHide.closest('.main__payment-term').querySelector('label');
 
     if (checkbox.checked) {
-        submitButton.textContent = `Оплатить ${formatNumber(price)} сом`;
+        submitButton.textContent = `Оплатить ${formatNumber(priceBlock.textContent)} сом`;
         elementToHide.style.display = 'none';
         label.style.marginBottom = 0;
     } else {

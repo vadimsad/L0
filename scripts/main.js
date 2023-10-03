@@ -1,8 +1,9 @@
-import { changePayment, changeShippingAddressCallback, decreaseCount, deleteProduct, handleCountChange, handleCountInput, increaseCount, toggleFavorite, toggleProduct } from './components/cart.js';
+import { changePayment, changeShippingAddressCallback, decreaseCount, deleteProduct, getFinalPrice, getTotalCount, handleCountChange, handleCountInput, increaseCount, toggleFavorite, toggleProduct } from './components/cart.js';
 import { deleteShippingItem, hideModal, resetPaymentInput, resetShippingInput, showModal, unfixPageScroll, handleTabChange } from './components/modal.js';
 import handleOrderSubmit, { handleImmediatePaymentChange } from './components/orderForm.js'
 import { createDiscountTooltip, positionTooltip } from './components/tooltip.js';
-import { hideProducts } from './utils/hideProducts.js';
+import { chooseWordForm } from './utils/chooseWordForm.js';
+import { formatNumber } from './utils/formatNumber.js';
 import { throttle } from './utils/throttle.js';
 import { handleTelInputChange, validateInput } from './utils/validation.js';
 
@@ -10,7 +11,7 @@ import { handleTelInputChange, validateInput } from './utils/validation.js';
 const orderForm = document.querySelector('#make-order-form');
 const recepientForm = document.querySelector('#recepient-data');
 const submitButton = orderForm.querySelector('button[type="submit"]');
-const totalPrice = orderForm.querySelector('#price-total').textContent;
+const totalPriceBlock = orderForm.querySelector('#price-total');
 const immediatePaymentCheckbox = orderForm.querySelector('#immediate-payment');
 const immediatePaymentDescription = orderForm.querySelector('.main__payment-term-description');
 
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Обработка чекбокса немедленной оплаты
 immediatePaymentCheckbox.addEventListener('change', () =>
-    handleImmediatePaymentChange(immediatePaymentCheckbox, submitButton, totalPrice, immediatePaymentDescription));
+    handleImmediatePaymentChange(immediatePaymentCheckbox, submitButton, totalPriceBlock, immediatePaymentDescription));
 
 // Скрытие товаров
 const hideButtons = document.querySelectorAll('.cart__controls-show');
@@ -143,3 +144,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const discountTooltips = document.querySelectorAll('.item__sum-discountless .tooltip');
     discountTooltips.forEach(createDiscountTooltip)
 })
+
+function hideProducts(button, elementToHide) {
+    console.log('hide products')
+    const label = button.closest('.cart__controls').querySelector('label');
+    const countBlock = button.closest('.cart__controls').querySelector('.cart__controls-items-count');
+    const countElement = document.querySelector('.items-count');
+    const priceElement = document.querySelector('.items-price');
+
+    elementToHide.classList.toggle('hidden');
+    button.classList.toggle('hidden');
+    if (label && countBlock) {
+        label.classList.toggle('hidden');
+        countBlock.classList.toggle('hidden');
+    }
+
+    if (elementToHide.classList.contains('hidden')) {
+        elementToHide.classList.add('overflow-hidden');
+        elementToHide.addEventListener('transitionend', resetOverflow);
+    } else {
+        elementToHide.removeEventListener('transitionend', resetOverflow);
+    }
+
+    updateProductInfo(countElement, priceElement);
+
+    function resetOverflow(event) {
+        if (event.propertyName !== 'grid-template-rows') return;
+
+        if (!elementToHide.classList.contains('hidden')) {
+            elementToHide.classList.remove('overflow-hidden')
+        }
+    }
+}
+
+function updateProductInfo(countElement, priceElement) {
+    countElement.textContent = `${getTotalCount()} ${chooseWordForm(getTotalCount(), ['товар', 'товара', 'товаров'])} · `;
+    priceElement.textContent = `${formatNumber(getFinalPrice(), ' ')} сом`;
+}
